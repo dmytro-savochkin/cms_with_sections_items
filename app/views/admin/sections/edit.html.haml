@@ -1,0 +1,39 @@
+%h1 Edit Section
+
+= form_tag admin_section_path(@section), :method => :put do
+
+  = label :section, :name, 'Name'
+  = text_field :section, 'name'
+  %br
+
+  = label :section, :short_name, 'Short name'
+  = text_field :section, 'short_name'
+  %br
+
+  = label :section, :alias, 'Alias'
+  = text_field :section, 'alias'
+  %br
+
+
+
+  = label :section, :parent_id, 'Parent'
+  %select{:name => :section}
+    %option{:value => "0", :selected => @section[:level] == 1} root
+    - section_checkbox_tree(@sections).each do |select|
+      %option{:value => select[:id], :selected => @section[:parent_id] == select[:id]}= select[:name].html_safe
+
+
+
+  %br
+
+
+  = label :section, :hidden, 'Hidden'
+  %input{:name => 'section[hidden]', :id => 'section_hidden', :type => 'checkbox', :checked => @section[:hidden] == true}
+  %br
+
+
+
+
+  %br
+
+  = submit_tag 'Update Section'
