@@ -61,13 +61,13 @@ NavigatorClubCms::Application.routes.draw do
   #match 'admin/items/*action' => 'admin#items'
 
   namespace :admin do
-    # Directs /admin/products/* to Admin::ProductsController
-    # (app/controllers/admin/products_controller.rb)
-    resources :sections
+    resources :sections, :except => ['show']
     resources :items
     resource :session
 
     match 'login' => 'sessions#new', :as => 'login'
+    match 'sections/:id/up' => 'sections#shift', :as => 'section_up', :direction => 'up'
+    match 'sections/:id/down' => 'sections#shift', :as => 'section_down', :direction => 'down'
   end
 
   match 'admin' => 'admin/sections#index'

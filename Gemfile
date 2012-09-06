@@ -11,6 +11,10 @@ group :development, :test do
   gem 'cucumber-rails-training-wheels'
 end
 
+group :assets do
+  gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
+end
+
 group :production do
   gem 'pg'
 end

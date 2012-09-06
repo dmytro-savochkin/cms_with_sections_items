@@ -7,41 +7,75 @@ class Admin::SectionsController < ApplicationController
 
 
 
+
+
+
   def index
-    @sections = Section.order(:position)
+    @flattened_sections = Section.all_flattened
   end
 
-  def show
-    @section = Section.find params[:id]
-  end
 
   def edit
     @section = Section.find params[:id]
-    @sections = Section.order(:position)
+    @tabulated_sections_without_descendants = Section.tabulated_without_descendants_of(@section)
   end
+
 
   def update
-    @section = Section.find params[:id]
-    @section.update_attributes!(params[:section])
-    flash[:notice] = "#{@section.title} was successfully updated."
-    redirect_to section_path(@section)
+    @section = Section.update_with_shift(params[:section], params[:id])
+
+    if @section.valid?
+      flash[:success] = "#{@section.name} was successfully updated."
+      redirect_to admin_sections_path
+    else
+      flash.now[:error] = "Some errors occurred."
+      @tabulated_sections_without_descendants = Section.tabulated_without_descendants_of(@section)
+      render :edit
+    end
   end
+
 
   def new
+    @tabulated_sections = Section.tabulated_sections
   end
 
+
   def create
-    @section.create!(params[:section])
-    flash[:notice] = "#{@section.title} was successfully created."
-    redirect_to sections_path
+    @section = Section.create_with_shift(params[:section])
+
+    if @section.valid?
+      flash[:success] = "#{@section.name} was successfully created."
+      redirect_to admin_sections_path
+    else
+      flash.now[:error] = "Some errors occurred."
+      @tabulated_sections = Section.tabulated_sections
+      render :new
+    end
   end
+
 
   def destroy
     @section = Section.find params[:id]
-    @section.destroy
-    flash[:notice] = "Section '#{@section.title}' has been deleted."
-    redirect_to sections_path
+    if @section.destroy_with_shift
+      flash[:success] = "Section '#{@section.name}' has been deleted."
+    else
+      flash[:error] = "Some error occurred during deletion of '#{@section.name}'."
+    end
+    redirect_to admin_sections_path
   end
+
+
+
+
+  def shift
+    @section = Section.shift(params[:id], params[:direction])
+    flash[:success] = "Section '#{@section[:name]}' has been shifted #{params[:direction]}."
+    redirect_to admin_sections_path
+  end
+
+
+
+
 
 
 

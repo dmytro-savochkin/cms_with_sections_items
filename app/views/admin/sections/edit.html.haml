@@ -1,27 +1,37 @@
+= link_to 'back', admin_sections_path
+
+
 %h1 Edit Section
+
 
 = form_tag admin_section_path(@section), :method => :put do
 
   = label :section, :name, 'Name'
   = text_field :section, 'name'
+  .text-error= @section.errors[:name].join(', ')
   %br
 
   = label :section, :short_name, 'Short name'
   = text_field :section, 'short_name'
+  .text-error= @section.errors[:short_name].join(', ')
   %br
 
   = label :section, :alias, 'Alias'
   = text_field :section, 'alias'
+  .text-error= @section.errors[:alias].join(', ')
   %br
 
 
-
   = label :section, :parent_id, 'Parent'
-  %select{:name => :section}
-    %option{:value => "0", :selected => @section[:level] == 1} root
-    - section_checkbox_tree(@sections).each do |select|
-      %option{:value => select[:id], :selected => @section[:parent_id] == select[:id]}= select[:name].html_safe
+  = select :section, :parent_id, options_for_select(@tabulated_sections_without_descendants, @section[:parent_id]), { :include_blank => "root" }
+  .text-error= @section.errors[:parent_id].join(', ')
+  %br
 
+
+  = label :section, :description, 'Description'
+  = text_area :section, :description, :size => '80x8'
+  .text-error= @section.errors[:description].join(', ') unless @section.nil?
+  %br
 
 
   %br
@@ -35,5 +45,11 @@
 
 
   %br
-
   = submit_tag 'Update Section'
+
+
+  %br
+  %br
+  %br
+  = link_to 'delete', admin_section_path(@section), :method => :delete, :confirm => 'Are you sure? This section will be deleted completely.'
+

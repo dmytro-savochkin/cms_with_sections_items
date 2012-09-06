@@ -15,7 +15,7 @@ class Admin::SessionsController < ApplicationController
       :password_hash => login_data[:password_hash]
     ).empty?
     if found
-      flash[:notice] = "Wrong login or password."
+      flash[:error] = "Wrong login or password."
       redirect_to admin_login_path
     else
       session[:user] = {
@@ -29,7 +29,7 @@ class Admin::SessionsController < ApplicationController
 
   def destroy
     session[:user] = nil
-    flash[:notice] = "You have logged out."
+    flash[:success] = "You have logged out."
     redirect_to admin_login_path
   end
 end

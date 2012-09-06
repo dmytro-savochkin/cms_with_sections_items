@@ -1,14 +1,50 @@
-%h1 Create New Movie
+%h1 Create Section
 
-= form_tag movies_path do
 
-  = label :movie, :title, 'Title'
-  = text_field :movie, 'title'
+= form_tag admin_sections_path, :method => :post do
 
-  = label :movie, :rating, 'Rating'
-  = select :movie, :rating, ['G','PG','PG-13','R','NC-17']
+  = label :section, :name, 'Name'
+  = text_field :section, 'name'
+  .text-error= @section.errors[:name].join(', ') unless @section.nil?
+  %br
 
-  = label :movie, :release_date, 'Released On'
-  = date_select :movie, :release_date
+  = label :section, :short_name, 'Short name'
+  = text_field :section, 'short_name'
+  .text-error= @section.errors[:short_name].join(', ') unless @section.nil?
+  %br
 
-  = submit_tag 'Save Changes'
+  = label :section, :alias, 'Alias'
+  = text_field :section, 'alias'
+  .text-error= @section.errors[:alias].join(', ') unless @section.nil?
+  %br
+
+
+  = label :section, :parent_id, 'Parent'
+  = select :section, :parent_id, options_for_select(@tabulated_sections), { :include_blank => "root" }
+  .text-error= @section.errors[:parent_id].join(', ') unless @section.nil?
+
+
+  = label :section, :description, 'Description'
+  = text_area :section, :description, :size => '80x8'
+  .text-error= @section.errors[:description].join(', ') unless @section.nil?
+  %br
+
+
+  %br
+
+
+  = label :section, :hidden, 'Hidden'
+  %input{:name => 'section[hidden]', :id => 'section_hidden', :type => 'checkbox', :checked => false}
+  %br
+
+
+  - unless @section.nil?
+    .text-error= @section.errors.messages.except(:name, :short_name, :alias, :parent_id).to_a.map {|elem| elem.first.to_s + " " + elem.last.join(', ') + "<br>" unless elem.last.empty? }.join.html_safe
+
+
+
+
+  %br
+  = submit_tag 'Create Section'
+  %br
+  = link_to 'back', admin_sections_path
