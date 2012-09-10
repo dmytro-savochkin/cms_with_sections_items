@@ -2,7 +2,7 @@ class Admin::ItemsController < ApplicationController
   before_filter :authorized?
 
   def sub_layout
-    "admin"
+    "admin/right_menu"
   end
 
 
@@ -10,9 +10,9 @@ class Admin::ItemsController < ApplicationController
 
 
   protected
-  def authorized?
-    current_user = session[:user]
-    authorized = Admin.admin? current_user
-    redirect_to admin_login_path if authorized.nil?
-  end
+    def authorized?
+      current_user = session[:user]
+      authorized = Admin.where current_user unless current_user.nil?
+      redirect_to admin_login_path if authorized.nil?
+    end
 end

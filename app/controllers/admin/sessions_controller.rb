@@ -1,6 +1,6 @@
 class Admin::SessionsController < ApplicationController
   def sub_layout
-    "admin"
+    "admin/right_menu"
   end
 
 

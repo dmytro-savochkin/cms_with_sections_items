@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+name = "123"
+password = "456"
+Admin.create! :name => name, :password_hash => Digest::MD5.hexdigest(password)
