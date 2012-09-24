@@ -8,7 +8,8 @@ class Section < ActiveRecord::Base
   attr_accessible :name, :level, :short_name, :alias, :parent_id, :hidden, :description
 
 
-  validates :alias, :length => { :in => 1..40 }, :format => {:with => /[0-9a-z_]+/}
+  validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => "alias must consist only english letters, digits and underscore sign"
+  validates_length_of :alias, :in => 1..40
   validates_length_of :name, :in => 1..120
   validates_length_of :short_name, :in => 1..40
   validates_length_of :description, :maximum => 1200
@@ -21,8 +22,8 @@ class Section < ActiveRecord::Base
 
   # TODO: write unit tests for model and controller
   # TODO: remove siblings' calls from menu_helper#place_list_tags
-
-
+  # TODO: improve usability of checkboxes in forms
+  # TODO: items' file upload
 
   class << self
 
@@ -115,6 +116,20 @@ class Section < ActiveRecord::Base
       section
     end
 
+
+
+    def shifting_array(direction)
+      case direction
+        when "up"
+          directional = {:condition => "<", :ordering => "DESC", :next => -1}
+        when "down"
+          directional = {:condition => ">", :ordering => "ASC", :next => 1}
+        else
+          raise WrongDirectionError
+      end
+      directional
+    end
+
   end
 
 
@@ -123,14 +138,7 @@ class Section < ActiveRecord::Base
 
 
   def shift(direction)
-    case direction
-      when "up"
-        directional = {:condition => "<", :ordering => "DESC", :next => "-1"}
-      when "down"
-        directional = {:condition => ">", :ordering => "ASC", :next => "+1"}
-      else
-        raise WrongDirectionError
-    end
+    directional = Section.shifting_array(direction)
 
     section = self
     if section.can_be_shifted? directional[:condition]
@@ -143,11 +151,11 @@ class Section < ActiveRecord::Base
 
       Section.
           where('id IN (?)', section.with_descendants.map(&:id)).
-          update_all(["position = position + ?", directional[:next].to_i * next_section.with_descendants.length])
+          update_all(["position = position + ?", directional[:next] * next_section.with_descendants.length])
 
       Section.
           where('id IN (?)', next_section.with_descendants.map(&:id)).
-          update_all(["position = position + ?", -1 * directional[:next].to_i * section.with_descendants.length])
+          update_all(["position = position + ?", -1 * directional[:next] * section.with_descendants.length])
     else
       return false
     end
@@ -174,7 +182,7 @@ class Section < ActiveRecord::Base
     all_deleted = self.with_descendants.map {|descendant| true if descendant.delete}.all?
 
     if all_deleted
-      p Section.
+      Section.
         where('position >= ?', self[:position] + descendants_length).
         update_all(["position = position - ?", descendants_length])
     else

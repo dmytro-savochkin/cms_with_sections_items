@@ -1,0 +1,62 @@
+= f.label :name, 'Name' + ' ' + mark_required(Item, :name)
+= f.text_field :name
+.text-error= @item.errors[:name].join(', ')
+
+= f.label :alias, 'Alias' + ' ' + mark_required(Item, :alias)
+= f.text_field :alias
+.text-error= @item.errors[:alias].join(', ')
+
+= f.label :section_id, 'Parent section' + ' ' + mark_required(Item, :section_id)
+= f.select :section_id, options_for_select(@tabulated_sections, @item[:section_id])
+.text-error= @item.errors[:section_id].join(', ')
+%br
+%br
+
+
+= f.label :price, 'Price' + ' ' + mark_required(Item, :price)
+= f.text_field :price
+.text-error= @item.errors[:price].join(', ')
+
+= f.label :amount, 'Amount' + ' ' + mark_required(Item, :amount)
+= f.text_field :amount
+.text-error= @item.errors[:amount].join(', ')
+
+= f.label :manufacturer, 'Manufacturer' + ' ' + mark_required(Item, :manufacturer)
+= f.text_field :manufacturer
+.text-error= @item.errors[:manufacturer].join(', ')
+%br
+%br
+
+
+= f.label :photo_thumb, 'Photo (mini)' + ' ' + mark_required(Item, :photo_thumb)
+= f.file_field :photo_thumb
+.text-error= @item.errors[:photo_thumb].join(', ')
+
+= f.label :photo_full, 'Photo (full size)' + ' ' + mark_required(Item, :photo_full)
+= f.file_field :photo_full
+.text-error= @item.errors[:photo_full].join(', ')
+%br
+%br
+
+
+= f.label :description, 'Description' + ' ' + mark_required(Item, :description)
+= f.text_area :description, :size => '80x8'
+.text-error= @item.errors[:description].join(', ')
+%br
+
+
+%br
+
+= f.label :on_main_page, 'Show on main page' + ' ' + mark_required(Item, :on_main_page)
+= f.check_box(:on_main_page, :checked => @item[:on_main_page])
+
+%br
+%br
+
+= f.label :hidden, 'Hidden' + ' ' + mark_required(Item, :hidden)
+= f.check_box(:hidden, :checked => @item[:hidden])
+%br
+
+
+- unless @item.nil?
+  .text-error= errors_messages(@item.errors, [:name, :price, :manufacturer, :amount, :alias, :section_id]).join.html_safe

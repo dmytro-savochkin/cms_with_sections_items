@@ -2,9 +2,9 @@
 
 %h1 Edit Item
 
-= form_tag admin_item_path(@item), :method => :put do
+= form_for @item, :url => admin_item_path(@item), :method => :put do |f|
 
-  = render "layouts/admin/item_form"
+  = render "layouts/admin/item_form", :f => f
 
   %br
   = submit_tag 'Update Item'

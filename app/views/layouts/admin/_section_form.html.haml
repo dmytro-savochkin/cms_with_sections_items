@@ -1,26 +1,26 @@
-= label :section, :name, 'Name' + ' ' + mark_required(Section, :name)
-= text_field :section, 'name'
+= f.label :name, 'Name' + ' ' + mark_required(Section, :name)
+= f.text_field :name
 .text-error= @section.errors[:name].join(', ')
 %br
 
-= label :section, :short_name, 'Short name' + ' ' + mark_required(Section, :short_name)
-= text_field :section, 'short_name'
+= f.label :short_name, 'Short name' + ' ' + mark_required(Section, :short_name)
+= f.text_field :short_name
 .text-error= @section.errors[:short_name].join(', ')
 %br
 
-= label :section, :alias, 'Alias' + ' ' + mark_required(Section, :alias)
-= text_field :section, 'alias'
+= f.label :alias, 'Alias' + ' ' + mark_required(Section, :alias)
+= f.text_field :alias
 .text-error= @section.errors[:alias].join(', ')
 %br
 
 
-= label :section, :parent_id, 'Parent' + ' ' + mark_required(Section, :parent_id)
-= select :section, :parent_id, options_for_select(@tabulated_sections, @section[:parent_id]), { :include_blank => "root" }
+= f.label :parent_id, 'Parent' + ' ' + mark_required(Section, :parent_id)
+= f.select :parent_id, options_for_select(@tabulated_sections, @section[:parent_id]), { :include_blank => "root" }
 .text-error= @section.errors[:parent_id].join(', ')
 
 
-= label :section, :description, 'Description' + ' ' + mark_required(Section, :description)
-= text_area :section, :description, :size => '80x8'
+= f.label :description, 'Description' + ' ' + mark_required(Section, :description)
+= f.text_area :description, :size => '80x8'
 .text-error= @section.errors[:description].join(', ')
 %br
 
@@ -28,8 +28,8 @@
 %br
 
 
-= label :section, :hidden, 'Hidden' + ' ' + mark_required(Section, :hidden)
-= check_box(:section, :hidden, :checked => @section[:hidden])
+= f.label :hidden, 'Hidden' + ' ' + mark_required(Section, :hidden)
+= f.check_box(:hidden, :checked => @section[:hidden])
 %br
 
 

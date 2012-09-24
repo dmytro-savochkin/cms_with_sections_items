@@ -2,9 +2,9 @@
 
 %h1 Create Item
 
-= form_tag admin_items_path, :method => :post do
+= form_for @item, :url => admin_items_path, :method => :post do |f|
 
-  = render "layouts/admin/item_form"
+  = render "layouts/admin/item_form", :f => f
 
   %br
   = submit_tag 'Create Item'

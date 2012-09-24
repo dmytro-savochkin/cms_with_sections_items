@@ -1,6 +1,7 @@
 class Admin::SectionsController < ApplicationController
   before_filter :authorized?
 
+
   def sub_layout
     "admin/right_menu"
   end

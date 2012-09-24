@@ -62,7 +62,7 @@ NavigatorClubCms::Application.routes.draw do
 
   namespace :admin do
     resources :sections, :except => ['show']
-    resources :items
+    resources :items, :except => ['show']
     resource :session
 
     match 'login' => 'sessions#new', :as => 'login'

@@ -8,9 +8,8 @@ module MenuHelper
 
     sections_tree << tags[:ul]
     last_node_type = ""
-    p flattened_tree.inspect
-    flattened_tree.each do |node|
 
+    flattened_tree.each do |node|
       siblings = Section.where(:level => node[:level], :parent_id => node[:parent_id]) if node.kind_of? Section
       siblings = Item.where(:section_id => node[:section_id]) if node.kind_of? Item
       node[:shifts] = {}
