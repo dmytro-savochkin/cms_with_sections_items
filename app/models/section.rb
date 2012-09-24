@@ -16,58 +16,15 @@ class Section < ActiveRecord::Base
   validates_uniqueness_of :alias, :scope => :parent_id, :message => "alias must be unique within the scope of its parent section"
 
 
-  # TODO: create relations between section and item models
+
+
+
   # TODO: write unit tests for model and controller
+  # TODO: remove siblings' calls from menu_helper#place_list_tags
+
+
 
   class << self
-
-    def all_flattened(sections = self.order(:position), ul = "<ul>".html_safe, li = "<li>".html_safe)
-      flattened_tree = sections.flatten
-
-      closed_ul = ul.clone.insert(1, "/").html_safe
-      closed_li = li.clone.insert(1, "/").html_safe
-      last_level = 1
-      sections_tree = []
-
-      sections_tree << ul
-      flattened_tree.each do |node|
-        raise NoLevelError unless node.respond_to? :level
-
-        current_level = node[:level]
-        level_differences = (current_level - last_level).abs
-
-        if current_level <= last_level
-
-        end
-
-
-        if current_level < last_level
-          sections_tree << closed_ul
-          (level_differences-1).times {sections_tree << closed_li+closed_ul}
-          sections_tree << closed_li
-        end
-
-        sections_tree << li
-
-
-        if current_level > last_level
-          level_differences.times do
-            sections_tree << ul+li
-          end
-        end
-
-        siblings = Section.where(:level => current_level, :parent_id => node[:parent_id])
-        node[:shifts] = {}
-        node[:shifts][:up] = (siblings.where("position < ?", node[:position]).count > 0)
-        node[:shifts][:down] = (siblings.where("position > ?", node[:position]).count > 0)
-
-        sections_tree << node
-        sections_tree << closed_li
-        last_level = current_level
-      end
-      sections_tree << closed_ul
-    end
-
 
     def tabulated_sections(sections = self.order(:position), tab = "&nbsp;")
       sections.map! { |e| [(tab * 2 * e[:level] + e.name).html_safe, e[:id]] }
@@ -177,7 +134,6 @@ class Section < ActiveRecord::Base
 
     section = self
     if section.can_be_shifted? directional[:condition]
-
       next_section = Section.
           where(:level => section[:level]).
           where(:parent_id => section[:parent_id]).
@@ -230,7 +186,7 @@ class Section < ActiveRecord::Base
 
 
   def descendants
-    self.children.map { |c| [c] + c.children }
+    self.children.map { |c| [c] + c.descendants }
   end
 
   def with_descendants

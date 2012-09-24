@@ -11,7 +11,7 @@ class Admin::SectionsController < ApplicationController
 
 
   def index
-    @flattened_sections = Section.all_flattened
+    @menu_list = Menu.without_items
   end
 
 
@@ -89,11 +89,12 @@ class Admin::SectionsController < ApplicationController
 
 
   protected
-    def authorized?
-      current_user = session[:user]
-      authorized = Admin.where current_user unless current_user.nil?
-      redirect_to admin_login_path if authorized.nil?
-    end
+
+  def authorized?
+    current_user = session[:user]
+    authorized = Admin.where current_user unless current_user.nil?
+    redirect_to admin_login_path if authorized.nil?
+  end
 
 
 

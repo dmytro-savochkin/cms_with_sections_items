@@ -4,7 +4,7 @@
 
 %h2 All Sections
 
-- @flattened_sections.each do |element|
+- place_list_tags(@menu_list).each do |element|
   = element unless element.kind_of? Section
   - if element.kind_of? Section
     = link_to element[:name], edit_admin_section_path(element[:id]), :class => link_color?(element[:hidden])

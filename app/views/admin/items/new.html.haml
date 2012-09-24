@@ -1,0 +1,10 @@
+= link_to 'back', admin_items_path
+
+%h1 Create Item
+
+= form_tag admin_items_path, :method => :post do
+
+  = render "layouts/admin/item_form"
+
+  %br
+  = submit_tag 'Create Item'

@@ -66,8 +66,12 @@ NavigatorClubCms::Application.routes.draw do
     resource :session
 
     match 'login' => 'sessions#new', :as => 'login'
+
     match 'sections/:id/up' => 'sections#shift', :as => 'section_up', :direction => 'up'
     match 'sections/:id/down' => 'sections#shift', :as => 'section_down', :direction => 'down'
+
+    match 'items/:id/up' => 'items#shift', :as => 'item_up', :direction => 'up'
+    match 'items/:id/down' => 'items#shift', :as => 'item_down', :direction => 'down'
   end
 
   match 'admin' => 'admin/sections#index'

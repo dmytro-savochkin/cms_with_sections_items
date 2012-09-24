@@ -1,3 +1,7 @@
 class Item < ActiveRecord::Base
-  # attr_accessible :title, :body
+  belongs_to :section
+
+
+
+
 end

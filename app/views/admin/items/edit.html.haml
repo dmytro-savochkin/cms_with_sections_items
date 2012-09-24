@@ -1,0 +1,17 @@
+= link_to 'back', admin_items_path
+
+%h1 Edit Item
+
+= form_tag admin_item_path(@item), :method => :put do
+
+  = render "layouts/admin/item_form"
+
+  %br
+  = submit_tag 'Update Item'
+
+
+  %br
+  %br
+  %br
+  = link_to 'delete item', admin_item_path(@item), :method => :delete, :confirm => 'Are you sure? '
+
