@@ -9,6 +9,7 @@ class Item < ActiveRecord::Base
   attr_accessible :name, :alias, :section_id, :amount, :manufacturer,
                   :photo_thumb, :photo_full, :description, :on_main_page,
                   :hidden, :position, :price, :id, :created_at, :updated_at
+  attr_accessor :can_be_shifted
 
 
   validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => "alias must consist only english 

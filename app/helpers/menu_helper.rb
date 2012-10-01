@@ -10,13 +10,6 @@ module MenuHelper
     last_node_type = ""
 
     flattened_tree.each do |node|
-      siblings = Section.where(:level => node[:level], :parent_id => node[:parent_id]) if node.kind_of? Section
-      siblings = Item.where(:section_id => node[:section_id]) if node.kind_of? Item
-      node[:shifts] = {}
-      node[:shifts][:up] = (siblings.where("position < ?", node[:position]).count > 0)
-      node[:shifts][:down] = (siblings.where("position > ?", node[:position]).count > 0)
-
-
       if node.kind_of? Section
         raise NoLevelError unless node.respond_to? :level
 

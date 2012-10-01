@@ -9,6 +9,6 @@
   - if element.kind_of? Section
     = link_to element[:name], edit_admin_section_path(element[:id]), :class => link_color?(element[:hidden])
     &nbsp;&nbsp;
-    = link_to "&uarr;".html_safe, admin_section_up_path(element) if element[:shifts][:up] if element[:shifts][:up]
-    = link_to "&darr;".html_safe, admin_section_down_path(element) if element[:shifts][:down] if element[:shifts][:down]
+    = link_to "&uarr;".html_safe, admin_section_up_path(element) if element.can_be_shifted[:up]
+    = link_to "&darr;".html_safe, admin_section_down_path(element) if element.can_be_shifted[:down]
 

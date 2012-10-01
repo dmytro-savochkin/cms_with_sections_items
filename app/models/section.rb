@@ -6,7 +6,7 @@ class Section < ActiveRecord::Base
 
 
   attr_accessible :name, :level, :short_name, :alias, :parent_id, :hidden, :description
-
+  attr_accessor :can_be_shifted
 
   validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => "alias must consist only english letters, digits and underscore sign"
   validates_length_of :alias, :in => 1..40
