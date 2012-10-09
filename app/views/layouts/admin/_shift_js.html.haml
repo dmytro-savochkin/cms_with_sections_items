@@ -1,0 +1,57 @@
+:javascript
+  $('a.up, a.down').bind('ajax:complete', ajaxCompletness);
+
+  function createShiftLink(id, direction, type, create) {
+    if(create) {
+      link = $('li.'+type+' span.shift_links a').first().clone()
+      linkText = $('<div>').append(link).html()
+
+      if(direction == "up")
+        symbol = '&uarr;'
+      if(direction == "down")
+        symbol = '&darr;'
+      if(direction == "up" || direction == "down") {
+        var uarr = $('<p>&uarr;</p>').text();
+        var darr = $('<p>&darr;</p>').text();
+        var arrowRegexpMatch = new RegExp("("+uarr+"|"+darr+")", 'g')
+        return linkText.replace(/[\d]+/g, id).replace(/(down|up)/g, direction).replace(arrowRegexpMatch, symbol)
+      }
+    }
+    return ""
+  }
+
+  function ajaxCompletness(event, data) {
+    response = jQuery.parseJSON(data.responseText)
+    element_type = response.type
+    first = response.elements[0]
+    last = response.elements[1]
+
+    firstLi = $('li.'+element_type+'.' + first)
+    lastLi = $('li.'+element_type+'.' + last)
+    firstLi.insertAfter(lastLi)
+
+    could_be_shifted = [
+      {up: $('a.'+element_type+'.' + first + '.up').length != 0, down: $('a.'+element_type+'.' + first + '.down').length != 0},
+      {up: $('a.'+element_type+'.' + last + '.up').length != 0, down: $('a.'+element_type+'.' + last + '.down').length != 0}
+    ]
+
+    newLinks = [
+      [
+        createShiftLink(last, "up", element_type, could_be_shifted[0].up),
+        createShiftLink(last, "down", element_type, could_be_shifted[0].down)
+      ],
+      [
+        createShiftLink(first, "up", element_type, could_be_shifted[1].up),
+        createShiftLink(first, "down", element_type, could_be_shifted[1].down)
+      ]
+    ]
+
+    $('li.'+element_type+'.' + first + ' > span.shift_links').empty()
+    $('li.'+element_type+'.' + last + ' > span.shift_links').empty()
+
+    $('li.'+element_type+'.' + first + ' > span.shift_links').html(newLinks[1].join(" "))
+    $('li.'+element_type+'.' + last + ' > span.shift_links').html(newLinks[0].join(" "))
+
+    $('li.'+element_type+'.' + first + ' > span.shift_links > a.up, li.'+element_type+'.' + first + ' > span.shift_links > a.down').bind('ajax:complete', ajaxCompletness)
+    $('li.'+element_type+'.' + last + ' > span.shift_links > a.up, li.'+element_type+'.' + last + ' > span.shift_links > a.down').bind('ajax:complete', ajaxCompletness)
+  }

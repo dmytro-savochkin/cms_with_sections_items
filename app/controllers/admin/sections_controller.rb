@@ -1,4 +1,6 @@
 class Admin::SectionsController < ApplicationController
+  respond_to :html, :js, :json
+
   before_filter :authorized?
 
 
@@ -71,12 +73,21 @@ class Admin::SectionsController < ApplicationController
 
   def shift
     @section = Section.find params[:id]
-    if @section.shift(params[:direction])
-      flash[:success] = "Section '#{@section[:name]}' has been shifted #{params[:direction]}."
+    next_section = @section.shift(params[:direction])
+    if next_section
+      respond_to do |format|
+        format.html { redirect_to admin_sections_path }
+        format.json do
+          sections_to_swap = [@section[:id], next_section[:id]]
+          sections_to_swap.reverse! if params[:direction] == "up"
+          return_data = {:type => @section.class.to_s, :elements => sections_to_swap}
+          render :json => return_data.to_json
+        end
+      end
     else
       flash[:error] = "Section '#{@section[:name]}' can not be shifted #{params[:direction]}."
+      redirect_to admin_sections_path
     end
-    redirect_to admin_sections_path
   end
 
 

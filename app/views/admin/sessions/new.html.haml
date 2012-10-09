@@ -1,12 +1,13 @@
 %h1 Login page
 
 = form_tag admin_session_path, :name => :session, :method => :post do
-  = label_tag :name, 'user name'
+
   = text_field :session, "name"
+  = label_tag :name, 'user name'
+  %br
 
-  = label_tag :password, 'password'
   = password_field :session, "password"
-
+  = label_tag :password, 'password'
   %br
 
   = submit_tag 'log in'

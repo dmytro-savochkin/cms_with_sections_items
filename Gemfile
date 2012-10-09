@@ -20,6 +20,8 @@ group :production do
   gem 'pg'
 end
 
+#gem 'rmagick'
+gem 'carrierwave'
 gem 'jquery-rails'
 
 

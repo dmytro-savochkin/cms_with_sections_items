@@ -1,6 +1,7 @@
 !!!
 %html{:lang => "en"}
   %head
+    = javascript_include_tag :application
     %meta{:charset => "utf-8"}
       %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
         %title= content_for?(:title) ? yield(:title) : "NavigatorClubCms"
@@ -40,7 +41,5 @@
           .well.sidebar-nav
             %ul.nav.nav-list
               %li.nav-header= render "layouts/#{controller.sub_layout}"
-
-    = javascript_include_tag "application"
 
     = debug(params) if Rails.env.development?

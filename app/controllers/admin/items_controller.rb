@@ -70,12 +70,22 @@ class Admin::ItemsController < ApplicationController
 
   def shift
     @item = Item.find params[:id]
-    if @item.shift(params[:direction])
-      flash[:success] = "Item '#{@item[:name]}' has been shifted #{params[:direction]}."
+    next_item = @item.shift(params[:direction])
+    if next_item
+      respond_to do |format|
+        format.html { redirect_to admin_items_path }
+        format.json do
+          items_to_swap = [@item[:id], next_item[:id]]
+          items_to_swap.reverse! if params[:direction] == "up"
+          return_data = {:type => @item.class.to_s, :elements => items_to_swap}
+          render :json => return_data.to_json
+        end
+      end
     else
       flash[:error] = "Item '#{@item[:name]}' can not be shifted #{params[:direction]}."
+      redirect_to admin_items_path
     end
-    redirect_to admin_items_path
+
   end
 
 

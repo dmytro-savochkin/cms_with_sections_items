@@ -1,25 +1,30 @@
 = f.label :name, 'Name' + ' ' + mark_required(Section, :name)
+%br
 = f.text_field :name
 .text-error= @section.errors[:name].join(', ')
 %br
 
 = f.label :short_name, 'Short name' + ' ' + mark_required(Section, :short_name)
+%br
 = f.text_field :short_name
 .text-error= @section.errors[:short_name].join(', ')
 %br
 
 = f.label :alias, 'Alias' + ' ' + mark_required(Section, :alias)
+%br
 = f.text_field :alias
 .text-error= @section.errors[:alias].join(', ')
 %br
 
 
 = f.label :parent_id, 'Parent' + ' ' + mark_required(Section, :parent_id)
+%br
 = f.select :parent_id, options_for_select(@tabulated_sections, @section[:parent_id]), { :include_blank => "root" }
 .text-error= @section.errors[:parent_id].join(', ')
 
-
+%br
 = f.label :description, 'Description' + ' ' + mark_required(Section, :description)
+%br
 = f.text_area :description, :size => '80x8'
 .text-error= @section.errors[:description].join(', ')
 %br
@@ -27,9 +32,9 @@
 
 %br
 
-
-= f.label :hidden, 'Hidden' + ' ' + mark_required(Section, :hidden)
 = f.check_box(:hidden, :checked => @section[:hidden])
+= f.label :hidden, 'Hidden' + ' ' + mark_required(Section, :hidden)
+
 %br
 
 

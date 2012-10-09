@@ -1,8 +1,9 @@
 class Item < ActiveRecord::Base
   belongs_to :section
 
+  mount_uploader :photo_full, ItemPhotoUploader
 
-  before_validation :set_position_if_nil
+  before_validation :set_position_unless_set
   before_destroy :move_back_next_items
 
 
@@ -53,15 +54,13 @@ the scope of its parent section"
           order("position #{directional[:ordering]}").
           first
 
-      p item, next_item
-
       item.increment(:position, directional[:next]).save
       next_item.increment(:position, -1 * directional[:next]).save
     else
       return false
     end
 
-    true
+    next_item
   end
 
 
@@ -77,7 +76,7 @@ the scope of its parent section"
 
 
 
-  def set_position_if_nil
+  def set_position_unless_set
     if self[:position].nil?
       self[:position] = Item.where(:section_id => self[:section_id]).maximum('position').to_i + 1
       unless self.valid?

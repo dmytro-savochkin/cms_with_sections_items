@@ -4,16 +4,19 @@
 
 %h2 All Items
 
-- place_list_tags(@menu_list).each do |element|
+- place_list_tags_for(@menu_list).each do |element|
   - if element.kind_of? Section
     = element[:name]
 
   - elsif element.kind_of? Item
     = link_to element[:name], edit_admin_item_path(element[:id]), :class => link_color?(element[:hidden])
     &nbsp;&nbsp;
-    = link_to "&uarr;".html_safe, admin_item_up_path(element) if element.can_be_shifted[:up]
-    = link_to "&darr;".html_safe, admin_item_down_path(element) if element.can_be_shifted[:down]
+    %span.shift_links
+      = link_to "&uarr;".html_safe, admin_item_up_path(element), :remote => true, "data-type" => :json, :class => [element.class, element.id, 'up'] if element.can_be_shifted[:up]
+      = link_to "&darr;".html_safe, admin_item_down_path(element), :remote => true, "data-type" => :json, :class => [element.class, element.id, 'down'] if element.can_be_shifted[:down]
 
   - else
     = element
+
+= render :partial => 'layouts/admin/shift_js'
 

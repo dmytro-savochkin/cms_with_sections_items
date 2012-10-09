@@ -20,10 +20,12 @@ class Section < ActiveRecord::Base
 
 
 
-  # TODO: write unit tests for model and controller
-  # TODO: remove siblings' calls from menu_helper#place_list_tags
-  # TODO: improve usability of checkboxes in forms
-  # TODO: items' file upload
+  # TODO: write unit tests for model and controller after MacOS
+  # TODO: items' file upload after MacOS
+  # TODO: create AJAX for sections/items shifts and for errors' notifications in creating/updating
+  # TODO: localization?
+  # TODO: maybe make board games store site?
+
 
   class << self
 
@@ -160,7 +162,7 @@ class Section < ActiveRecord::Base
       return false
     end
 
-    true
+    next_section
   end
 
 

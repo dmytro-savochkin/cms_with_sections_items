@@ -946,8 +946,7 @@ textarea {
 }
 
 label {
-  display: block;
-  margin-bottom: 5px;
+
 }
 
 select,
@@ -970,7 +969,7 @@ input[type="color"],
   display: inline-block;
   height: 20px;
   padding: 4px 6px;
-  margin-bottom: 9px;
+  margin-bottom: 4px;
   font-size: 14px;
   line-height: 20px;
   color: #555555;
@@ -1043,7 +1042,8 @@ input[type="color"]:focus,
 
 input[type="radio"],
 input[type="checkbox"] {
-  margin: 4px 0 0;
+  margin: 0;
+  padding: 0;
   margin-top: 1px \9;
   *margin-top: 0;
   line-height: normal;
