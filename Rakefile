@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-NavigatorClubCms::Application.load_tasks
+Maxfoods::Application.load_tasks

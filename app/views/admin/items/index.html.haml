@@ -2,7 +2,7 @@
 
 = link_to 'Create new item', new_admin_item_path
 
-%h2 All Items
+%h1 All Items
 
 - place_list_tags_for(@menu_list).each do |element|
   - if element.kind_of? Section
@@ -18,5 +18,5 @@
   - else
     = element
 
-= render :partial => 'layouts/admin/shift_js'
+= render 'layouts/admin/shift_js'
 

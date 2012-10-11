@@ -27,3 +27,9 @@ gem 'jquery-rails'
 
 gem 'haml'
 
+
+gem 'omniauth'
+gem 'oauth2'
+gem 'omniauth-facebook'
+gem 'devise'
+

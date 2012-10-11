@@ -2,7 +2,7 @@
 
 = link_to 'Create new section', new_admin_section_path
 
-%h2 All Sections
+%h1 All Sections
 
 - place_list_tags_for(@menu_list).each do |element|
   = element unless element.kind_of? Section
@@ -13,4 +13,4 @@
       = link_to "&uarr;".html_safe, admin_section_up_path(element), :remote => true, "data-type" => :json, :class => [element.class, element.id, 'up'] if element.can_be_shifted[:up]
       = link_to "&darr;".html_safe, admin_section_down_path(element), :remote => true, "data-type" => :json, :class => [element.class, element.id, 'down'] if element.can_be_shifted[:down]
 
-= render :partial => 'layouts/admin/shift_js'
+= render 'layouts/admin/shift_js'

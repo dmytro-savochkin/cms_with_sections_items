@@ -1,7 +1,7 @@
 class Admin::SectionsController < ApplicationController
   respond_to :html, :js, :json
 
-  before_filter :authorized?
+  before_filter :authenticate_admin!
 
 
   def sub_layout
@@ -89,25 +89,5 @@ class Admin::SectionsController < ApplicationController
       redirect_to admin_sections_path
     end
   end
-
-
-
-
-
-
-
-
-
-
-
-  protected
-
-  def authorized?
-    current_user = session[:user]
-    authorized = Admin.where current_user unless current_user.nil?
-    redirect_to admin_login_path if authorized.nil?
-  end
-
-
 
 end

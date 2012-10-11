@@ -1,0 +1,12 @@
+%br
+
+%h1 Last comments
+
+- if @comments.empty?
+  %div No comments yet.
+
+- @comments.each do |comment|
+  = render 'layouts/admin/comments/show_comment', :comment => comment
+
+= render 'layouts/admin/comment_delete_js'
+

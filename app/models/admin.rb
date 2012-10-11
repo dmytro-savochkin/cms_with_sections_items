@@ -1,12 +1,5 @@
 class Admin < ActiveRecord::Base
+  devise :database_authenticatable, :registerable
 
-  class << self
-
-    def hash_password(password)
-      Digest::MD5.hexdigest(password)
-    end
-
-  end
-
-  attr_accessible :name, :password_hash
+  attr_accessible :email, :password, :password_confirmation
 end

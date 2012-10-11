@@ -1,5 +1,5 @@
 class Admin::ItemsController < ApplicationController
-  before_filter :authorized?
+  before_filter :authenticate_admin!
 
   def sub_layout
     "admin/right_menu"
@@ -85,24 +85,6 @@ class Admin::ItemsController < ApplicationController
       flash[:error] = "Item '#{@item[:name]}' can not be shifted #{params[:direction]}."
       redirect_to admin_items_path
     end
-
   end
 
-
-
-
-
-
-
-
-
-
-
-  protected
-
-  def authorized?
-    current_user = session[:user]
-    authorized = Admin.where current_user unless current_user.nil?
-    redirect_to admin_login_path if authorized.nil?
-  end
 end

@@ -9,9 +9,17 @@
   %br
   = submit_tag 'Update Item'
 
+  %br
+  %br
+  = link_to 'delete item', admin_item_path(@item), :method => :delete, :confirm => 'Are you sure?'
 
   %br
   %br
-  %br
-  = link_to 'delete item', admin_item_path(@item), :method => :delete, :confirm => 'Are you sure? '
 
+  - unless @item.comments.empty?
+    %h2 Comments
+
+    - @item.comments.each do |comment|
+      = render 'layouts/admin/comments/show_comment', :comment => comment
+
+= render 'layouts/admin/comment_delete_js'

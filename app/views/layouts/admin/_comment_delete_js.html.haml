@@ -1,0 +1,12 @@
+:javascript
+  $('a.Comment.delete').bind('ajax:complete', ajaxCommentDeletion);
+
+  function ajaxCommentDeletion(event, data) {
+    response = jQuery.parseJSON(data.responseText)
+    deleted = response.deleted
+    message = response.message
+    if(deleted)
+      $(this).parent().remove()
+    else
+      alert(message)
+  }

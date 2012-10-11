@@ -22,9 +22,7 @@ class Section < ActiveRecord::Base
 
   # TODO: write unit tests for model and controller after MacOS
   # TODO: items' file upload after MacOS
-  # TODO: create AJAX for sections/items shifts and for errors' notifications in creating/updating
   # TODO: localization?
-  # TODO: maybe make board games store site?
 
 
   class << self

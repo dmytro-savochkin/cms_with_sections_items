@@ -1,4 +1,7 @@
-NavigatorClubCms::Application.routes.draw do
+Maxfoods::Application.routes.draw do
+  devise_for :admins
+  devise_for :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -63,9 +66,9 @@ NavigatorClubCms::Application.routes.draw do
   namespace :admin do
     resources :sections, :except => ['show']
     resources :items, :except => ['show']
-    resource :session
+    resources :comments, :only => ['destroy', 'index']
 
-    match 'login' => 'sessions#new', :as => 'login'
+    #match 'login' => 'sessions#new', :as => 'login'
 
     match 'sections/:id/up' => 'sections#shift', :as => 'section_up', :direction => 'up'
     match 'sections/:id/down' => 'sections#shift', :as => 'section_down', :direction => 'down'

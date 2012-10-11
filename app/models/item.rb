@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
   belongs_to :section
+  has_many :comments, :foreign_key => 'item_id', :order => 'position'
 
   mount_uploader :photo_full, ItemPhotoUploader
 
@@ -21,7 +22,7 @@ letters, digits and underscore sign"
   validates_length_of :manufacturer, :maximum => 120
   validates_length_of :amount, :maximum => 120
   validates_length_of :description, :maximum => 1200
-  validates_presence_of :name, :alias, :position, :price
+  validates_presence_of :name, :alias, :position, :price, :section_id
   validates_uniqueness_of :alias, :scope => :section_id, :message => "alias must be unique within 
 the scope of its parent section"
 
@@ -104,6 +105,8 @@ the scope of its parent section"
           where('position >= ? AND section_id = ?', old_position, old_parent_id).
           update_all("position = position - 1")
       end
+    else
+      self.save
     end
   end
 

@@ -1,5 +1,5 @@
 :javascript
-  $('a.up, a.down').bind('ajax:complete', ajaxCompletness);
+  $('a.up, a.down').bind('ajax:complete', ajaxShiftCompleted);
 
   function createShiftLink(id, direction, type, create) {
     if(create) {
@@ -20,7 +20,7 @@
     return ""
   }
 
-  function ajaxCompletness(event, data) {
+  function ajaxShiftCompleted(event, data) {
     response = jQuery.parseJSON(data.responseText)
     element_type = response.type
     first = response.elements[0]
@@ -52,6 +52,6 @@
     $('li.'+element_type+'.' + first + ' > span.shift_links').html(newLinks[1].join(" "))
     $('li.'+element_type+'.' + last + ' > span.shift_links').html(newLinks[0].join(" "))
 
-    $('li.'+element_type+'.' + first + ' > span.shift_links > a.up, li.'+element_type+'.' + first + ' > span.shift_links > a.down').bind('ajax:complete', ajaxCompletness)
-    $('li.'+element_type+'.' + last + ' > span.shift_links > a.up, li.'+element_type+'.' + last + ' > span.shift_links > a.down').bind('ajax:complete', ajaxCompletness)
+    $('li.'+element_type+'.' + first + ' > span.shift_links > a.up, li.'+element_type+'.' + first + ' > span.shift_links > a.down').bind('ajax:complete', ajaxShiftCompleted)
+    $('li.'+element_type+'.' + last + ' > span.shift_links > a.up, li.'+element_type+'.' + last + ' > span.shift_links > a.down').bind('ajax:complete', ajaxShiftCompleted)
   }
