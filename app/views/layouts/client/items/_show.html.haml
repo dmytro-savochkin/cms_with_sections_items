@@ -1,0 +1,5 @@
+%a{:href => item.parent_section_path + item_path(item) }
+  = item.name.titleize
+  - unless item.photo_thumb.nil?
+    %br
+    = image_tag("/"+item.photo_thumb, :size => "160x10")

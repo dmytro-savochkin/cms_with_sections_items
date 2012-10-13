@@ -11,7 +11,7 @@ class Item < ActiveRecord::Base
   attr_accessible :name, :alias, :section_id, :amount, :manufacturer,
                   :photo_thumb, :photo_full, :description, :on_main_page,
                   :hidden, :position, :price, :id, :created_at, :updated_at
-  attr_accessor :can_be_shifted
+  attr_accessor :can_be_shifted, :full_path, :bread_crumbs, :parent_section_path
 
 
   validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => "alias must consist only english 
@@ -41,6 +41,12 @@ the scope of its parent section"
       end
       directional
     end
+
+    def split_item_path(path)
+      path = Section.split_section_path path
+      [path[0...-2].join("/"), path.last]
+    end
+
   end
 
 

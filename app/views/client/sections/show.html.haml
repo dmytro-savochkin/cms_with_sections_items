@@ -1,0 +1,7 @@
+%h1= @section.name.titleize
+
+%div.description= @section.description
+
+- unless @section.items.empty?
+  %hr
+  = render "layouts/client/items/cycle", :items => @section_items.reject(&:hidden)

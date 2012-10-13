@@ -12,9 +12,7 @@ group :development, :test do
   gem 'simplecov'
 end
 
-group :assets do
-  gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
-end
+gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
 
 group :production do
   gem 'pg'
@@ -28,8 +26,9 @@ gem 'jquery-rails'
 gem 'haml'
 
 
+gem 'devise'
 gem 'omniauth'
 gem 'oauth2'
 gem 'omniauth-facebook'
-gem 'devise'
+
 

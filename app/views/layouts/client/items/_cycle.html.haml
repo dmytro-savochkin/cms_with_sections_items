@@ -1,0 +1,10 @@
+%table.table-bordered{:width => "100%"}
+  - items.each_slice(3) do |items_group|
+    - (3-items_group.count).abs.times {items_group.push nil}
+    %tr.item_group
+      - items_group.each do |item|
+        %td.pagination-centered.item{:width => "33%"}
+          - if item.nil?
+            &nbsp;
+          - else
+            = render "layouts/client/items/show", :item => item

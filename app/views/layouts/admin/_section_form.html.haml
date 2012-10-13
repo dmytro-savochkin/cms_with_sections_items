@@ -39,4 +39,4 @@
 
 
 - unless @section.nil?
-  .text-error= errors_messages(@section.errors, [:name, :short_name, :alias, :parent_id]).join.html_safe
+  .text-error= errors_messages(@section.errors, [:name, :short_name, :alias, :parent_id, :description]).join.html_safe

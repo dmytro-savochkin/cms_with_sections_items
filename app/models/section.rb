@@ -6,14 +6,21 @@ class Section < ActiveRecord::Base
 
 
   attr_accessible :name, :level, :short_name, :alias, :parent_id, :hidden, :description
-  attr_accessor :can_be_shifted
+  attr_accessor :can_be_shifted, :full_path, :bread_crumbs
 
-  validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => "alias must consist only english letters, digits and underscore sign"
-  validates_length_of :alias, :in => 1..40
+
+  ALIAS_ALLOWABLE_SYMBOLS = '0-9a-z_-'
+  ALIAS_MASK = Regexp.new('^[' + ALIAS_ALLOWABLE_SYMBOLS + ']+$')
+  FORBIDDEN_ALIASES = %w(item admin)
+
+  validates :alias,
+            :exclusion => { :in => FORBIDDEN_ALIASES, :message => "alias '%{value}' is reserved." },
+            :length => {:in => 1..40},
+            :format => {:with => ALIAS_MASK, :message => "alias must consist only english letters, digits and underscores"}
   validates_length_of :name, :in => 1..120
-  validates_length_of :short_name, :in => 1..40
-  validates_length_of :description, :maximum => 1200
-  validates_presence_of :name, :short_name, :alias, :position, :level
+  validates_length_of :short_name, :maximum => 40
+  validates_length_of :description, :maximum => 3000
+  validates_presence_of :name, :position, :level, :alias
   validates_uniqueness_of :alias, :scope => :parent_id, :message => "alias must be unique within the scope of its parent section"
 
 
@@ -21,8 +28,10 @@ class Section < ActiveRecord::Base
 
 
   # TODO: write unit tests for model and controller after MacOS
-  # TODO: items' file upload after MacOS
+  # TODO: items' file upload after MacOS, customize items' lists in section pages
   # TODO: localization?
+  # TODO: facebook comments
+  # TODO: refactoring
 
 
   class << self
@@ -130,7 +139,48 @@ class Section < ActiveRecord::Base
       directional
     end
 
+
+
+
+    #
+    # for /drinks/pepsi/pepsi-cola/ paths it generates queries like that:
+    #
+    # SELECT * WHERE
+    #   alias = pepsi-cola AND level = 3 AND parent_id IN
+    #     (SELECT id WHERE alias = pepsi AND level = 2 AND parent_id IN
+    #       (SELECT id WHERE alias = drinks AND level = 1 AND parent_id IS NULL)
+    #     )
+    def find_by_path(path_string)
+      path_array = split_section_path path_string
+
+      previous_query = nil
+      path_array.each_with_index do |alias_name, index|
+        query = Section
+        query = query.select('id') unless index == path_array.length - 1
+        query = query.where({:alias => alias_name, :level => index + 1})
+        query = query.where(:parent_id => previous_query) if index > 0
+        query = query.where(:parent_id => nil) if index == 0
+        previous_query = query
+      end
+
+      previous_query.first
+    end
+
+
+
+    def split_section_path(path)
+      regexp_match = Regexp.new('[^/' + Section::ALIAS_ALLOWABLE_SYMBOLS + ']')
+      path.gsub(regexp_match, '').split('/').reject {|e| e.empty?}
+    end
+
+
   end
+
+
+
+
+
+
 
 
 
@@ -178,10 +228,13 @@ class Section < ActiveRecord::Base
 
 
   def destroy_with_shift
-    descendants_length = self.with_descendants.length
-    all_deleted = self.with_descendants.map {|descendant| true if descendant.delete}.all?
+    section_with_descendants = self.with_descendants
+    descendants_length = section_with_descendants.length
+    sections_were_deleted = section_with_descendants.map do |section|
+      true if (section.items.empty? or section.items.each(&:delete)) and section.delete
+    end
 
-    if all_deleted
+    if sections_were_deleted.all?
       Section.
         where('position >= ?', self[:position] + descendants_length).
         update_all(["position = position - ?", descendants_length])
@@ -206,4 +259,5 @@ class Section < ActiveRecord::Base
     nodes << node = node.parent while node.parent
     nodes
   end
+
 end

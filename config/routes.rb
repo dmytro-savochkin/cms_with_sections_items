@@ -1,6 +1,12 @@
 Maxfoods::Application.routes.draw do
   devise_for :admins
-  devise_for :users
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "client/users/omniauth_callbacks" }
+  devise_scope :user do
+    get 'sign_in', :to => 'client/users/sessions#new', :as => :new_user_session
+    get 'sign_out', :to => 'client/users/sessions#destroy', :as => :destroy_user_session
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -28,47 +34,11 @@ Maxfoods::Application.routes.draw do
   #     end
   #   end
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  #resources :sections, :only => [:index, :show] do
-  #  resources :items, :only => [:show]
-  #end
-
-
-  root :to => 'sections#index'
-
-
-
-
-
-  #match 'admin/sections/*action' => 'admin_sections#sections'
-  #match 'admin/items/*action' => 'admin#items'
 
   namespace :admin do
-    resources :sections, :except => ['show']
-    resources :items, :except => ['show']
-    resources :comments, :only => ['destroy', 'index']
-
-    #match 'login' => 'sessions#new', :as => 'login'
+    resources :sections, :except => %w(show)
+    resources :items, :except => %w(show)
+    resources :comments, :only => %w(destroy index)
 
     match 'sections/:id/up' => 'sections#shift', :as => 'section_up', :direction => 'up'
     match 'sections/:id/down' => 'sections#shift', :as => 'section_down', :direction => 'down'
@@ -76,11 +46,13 @@ Maxfoods::Application.routes.draw do
     match 'items/:id/up' => 'items#shift', :as => 'item_up', :direction => 'up'
     match 'items/:id/down' => 'items#shift', :as => 'item_down', :direction => 'down'
   end
-
   match 'admin' => 'admin/sections#index'
 
 
 
-  match '*section_path' => 'sections#show'
-  match '*section_path/item/:item_name' => 'items#show'
+  scope :module => "client" do
+    root :to => 'sections#index'
+    match '*section_path/item/:item_name' => 'items#show'
+    match '*section_path' => 'sections#show'
+  end
 end
