@@ -36,15 +36,17 @@
               #warning.message= flash[:warning]
 
 
-            - if controller.module_name == "Client"
+            - if client_panel?
               = render "layouts/client/bread_crumbs"
 
             = yield
 
         .span3
           .well.sidebar-nav
-            %ul.nav.nav-list
+            = render "layouts/"+panel_name+"/login_panel"
+          .well.sidebar-nav
+            %ul.nav.nav-list.shifted-left
               %li.nav-header= render "layouts/#{controller.sub_layout}" if controller.respond_to? :sub_layout
 
-    = debug(params) if Rails.env.development?
-    = session.inspect unless session.nil?
+    %div= debug(params) if Rails.env.development?
+    %div= session.inspect unless session.nil?

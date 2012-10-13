@@ -1,7 +1,9 @@
-- unless @bread_crumbs.nil?
+%ul.breadcrumb
+  - add_root_element_to_bread_crumbs ("Home")
   - @bread_crumbs.each_with_index do |element, index|
     - if index == @bread_crumbs.length - 1
-      = element.titleize
+      %li.active= element.titleize
     - else
-      = link_to element.titleize, link_to_nth_element_of(index, request.fullpath)
-      &gt;
+      %li
+        = link_to element.titleize, link_to_nth_element_of(index, request.fullpath)
+        %span.divider /

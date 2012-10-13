@@ -1,4 +1,5 @@
 class Admin::SectionsController < ApplicationController
+  include AdminLoginMethods
   respond_to :html, :js, :json
 
   before_filter :authenticate_admin!

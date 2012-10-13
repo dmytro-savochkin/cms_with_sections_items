@@ -21,7 +21,6 @@ class Client::SectionsController < ApplicationController
     not_found if @section.hidden
     @section_items = @section.items.each {|item| item.parent_section_path = request.fullpath}
 
-
     menu_list
     bread_crumbs
   end
@@ -32,7 +31,10 @@ class Client::SectionsController < ApplicationController
   private
 
   def bread_crumbs
-    return [] if request.fullpath == "/"
+    if request.fullpath == "/"
+      @bread_crumbs = []
+      return
+    end
     current_menu_element = @menu_list.select {|e| request.fullpath == e.full_path}.first
     @bread_crumbs = current_menu_element.bread_crumbs
   end

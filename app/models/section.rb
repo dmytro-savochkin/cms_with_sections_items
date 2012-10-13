@@ -31,6 +31,7 @@ class Section < ActiveRecord::Base
   # TODO: items' file upload after MacOS, customize items' lists in section pages
   # TODO: localization?
   # TODO: facebook comments
+  # TODO: right redirection after authorization
   # TODO: refactoring
 
 

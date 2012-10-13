@@ -1,9 +1,3 @@
-class Client::Users::SessionsController < ApplicationController
-  def new
-
-  end
-
-  def destroy
-
-  end
+class Client::Users::SessionsController < Devise::SessionsController
+  include ClientLoginMethods
 end

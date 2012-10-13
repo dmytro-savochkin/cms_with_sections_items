@@ -1,10 +1,9 @@
 Maxfoods::Application.routes.draw do
-  devise_for :admins
+  devise_for :admins, :controllers => { :sessions => "admin/admins/sessions" }
 
   devise_for :users, :controllers => { :omniauth_callbacks => "client/users/omniauth_callbacks" }
   devise_scope :user do
-    get 'sign_in', :to => 'client/users/sessions#new', :as => :new_user_session
-    get 'sign_out', :to => 'client/users/sessions#destroy', :as => :destroy_user_session
+    delete 'sign_out', :to => 'client/users/sessions#destroy', :as => :destroy_user_session
   end
 
 

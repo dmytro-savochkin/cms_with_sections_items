@@ -1,8 +1,3 @@
 %h1 Popular items
 
-= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-
-%br
-%br
-
 = render "layouts/client/items/cycle", :items => @items_on_main_page

@@ -4,6 +4,13 @@ module Client::RoutingHelper
   end
 
   def link_to_nth_element_of(n, path)
-    "/" + path.split("/").drop(1)[0..n].join("/")
+    return "/" if n == 0
+    "/" + path.split("/").drop(1)[0...n].join("/")
+  end
+
+  def add_root_element_to_bread_crumbs(root_element)
+    unless @bread_crumbs.nil?
+      @bread_crumbs.unshift root_element
+    end
   end
 end

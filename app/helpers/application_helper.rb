@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def client_panel?
+    controller.module_name == "Client"
+  end
+
+  def panel_name
+    controller.module_name.downcase
+  end
+
   def link_color?(hidden)
     return "muted" if hidden
     ""

@@ -1,25 +1,42 @@
 class Client::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  include ClientLoginMethods
 
-  def facebook
-    logger.info "LOGLOGLOGLOGLOGLOGLOGLOGLOG123"
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
-    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
+
+  def callback_method(provider)
+    @user = User.find_oauth(provider, request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      sign_in_and_redirect @user, :event => :authentication
     else
-      session["devise.facebook_data"] = request.env["omniauth.auth"]
+      session["devise."+provider+"_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
     end
   end
 
+
+
+  def twitter
+    callback_method("twitter")
+  end
+
+  def vkontakte
+    callback_method("vkontakte")
+  end
+
+
+  def google_oauth2
+    callback_method("google_oauth2")
+  end
+
+  def facebook
+    callback_method("facebook")
+  end
+
+
+
+
+
   def passthru
-    logger.info "LOGLOGLOGLOGLOGLOGLOGLOGLOG321"
-    logger.info "LOGLOGLOGLOGLOGLOGLOGLOGLOG"
-    logger.info "LOGLOGLOGLOGLOGLOGLOGLOGLOG"
     render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
-    # Or alternatively,
-    # raise ActionController::RoutingError.new('Not Found')
   end
 end

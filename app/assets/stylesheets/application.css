@@ -1,3 +1,18 @@
 /*
 *= require bootstrap.css
 */
+.hidden {
+    display:none;
+}
+a.dashed {
+    text-decoration: none;
+    border-bottom: dashed 1px #08C;
+}
+
+.ul-marked {
+    list-style-type: disc;
+}
+
+.shifted-left {
+    margin-left: -29px;
+}
