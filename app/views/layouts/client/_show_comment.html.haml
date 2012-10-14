@@ -1,0 +1,10 @@
+%div.comment
+  %div.comment-header
+    %strong
+      = comment.user.name
+      = login_provider_in_brackets(comment.user)
+    at
+    = l comment.created_at, :format => :short
+
+  %div
+    = comment.text

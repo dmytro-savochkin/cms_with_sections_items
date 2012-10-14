@@ -48,6 +48,7 @@ Maxfoods::Application.routes.draw do
   match 'admin' => 'admin/sections#index'
 
 
+  post 'client/comments/create', :to => 'client/comments#create', :as => :new_comment
 
   scope :module => "client" do
     root :to => 'sections#index'

@@ -1,0 +1,14 @@
+Add new comment as
+%strong
+  - if user_signed_in?
+    = current_user.name
+    = login_provider_in_brackets
+
+%div.comment-new
+  = form_for @comment = Comment.new, :url => new_comment_path, :method => :post do |f|
+    %div
+      %div= f.text_area :text, :size => '80x6'
+
+    = f.hidden_field :item_id, :value => @item.id
+
+    = submit_tag 'Post it', :disable_with => "Please wait..."

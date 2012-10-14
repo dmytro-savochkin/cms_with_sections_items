@@ -12,3 +12,22 @@
 
 %div.description
   = @item.description
+
+
+
+%h2 Comments
+
+- if @item.comments.empty?
+  %div There are no comments yet. Be the first!
+- else
+  %div.comments
+  - @item.comments.each_with_index do |comment, index|
+    = render "layouts/client/show_comment", :comment => comment, :index => index
+
+%br
+
+- if user_signed_in?
+  = render "layouts/client/new_comment"
+- else
+  %div
+    You need to be logged in for adding comments.

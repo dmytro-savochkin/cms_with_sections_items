@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :comments
+
   devise :rememberable, :trackable, :omniauthable
 
   attr_accessible :provider, :uid, :name, :email, :encrypted_password
@@ -15,14 +17,14 @@ class User < ActiveRecord::Base
 
 
   def self.find_oauth(provider, auth, signed_in_resource=nil)
-    logger.info auth.inspect
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create( name:auth.info.name,
-                          provider:provider,
-                          uid:auth.uid,
-                          email: email_from_auth_data(auth, provider),
-                          encrypted_password:Devise.friendly_token[0,20]
+      user = User.create(
+          name:auth.info.name,
+          provider:provider,
+          uid:auth.uid,
+          email: email_from_auth_data(auth, provider),
+          encrypted_password:Devise.friendly_token[0,20]
       )
     end
     user

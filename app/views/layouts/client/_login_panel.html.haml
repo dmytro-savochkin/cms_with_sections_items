@@ -1,6 +1,6 @@
 %div#login_panel
   - if user_signed_in?
-    = link_to "Sign out", destroy_user_session_path, :method => :delete
+    = link_to "Sign out " + login_provider_in_brackets, destroy_user_session_path, :method => :delete
   - else
     = link_to_function "Sign in", "$('ul#login_links').toggle(150)", :class => %w(dashed)
     %ul#login_links.hidden.ul-marked

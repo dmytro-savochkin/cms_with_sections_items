@@ -6,7 +6,7 @@
     deleted = response.deleted
     message = response.message
     if(deleted)
-      $(this).parent().remove()
+      $(this).parent().parent().remove()
     else
       alert(message)
   }

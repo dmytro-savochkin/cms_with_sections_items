@@ -30,9 +30,9 @@ class Section < ActiveRecord::Base
   # TODO: write unit tests for model and controller after MacOS
   # TODO: items' file upload after MacOS, customize items' lists in section pages
   # TODO: localization?
-  # TODO: facebook comments
-  # TODO: right redirection after authorization
   # TODO: refactoring
+
+  # TODO: admin signout leads to user signout and vice versa
 
 
   class << self

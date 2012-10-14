@@ -5,8 +5,8 @@
 - if @comments.empty?
   %div No comments yet.
 
-- @comments.each do |comment|
-  = render 'layouts/admin/comments/show_comment', :comment => comment
+- @comments.each_with_index do |comment, index|
+  = render 'layouts/admin/show_comment', :comment => comment, :index => index
 
 = render 'layouts/admin/comment_delete_js'
 

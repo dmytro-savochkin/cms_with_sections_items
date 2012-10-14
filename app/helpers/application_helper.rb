@@ -7,6 +7,14 @@ module ApplicationHelper
     controller.module_name.downcase
   end
 
+  def login_provider_in_brackets(user = current_user)
+    bracketize(user.provider.split("_").first.titleize)
+  end
+
+  def bracketize(text)
+    "[" + text + "]"
+  end
+
   def link_color?(hidden)
     return "muted" if hidden
     ""

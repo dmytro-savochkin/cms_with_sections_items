@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   belongs_to :section
-  has_many :comments, :foreign_key => 'item_id', :order => 'position'
+  has_many :comments, :foreign_key => 'item_id', :order => 'created_at', :dependent => :delete_all
 
   mount_uploader :photo_full, ItemPhotoUploader
 

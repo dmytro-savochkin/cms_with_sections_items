@@ -1,6 +1,7 @@
 /*
 *= require bootstrap.css
 */
+
 .hidden {
     display:none;
 }
@@ -15,4 +16,8 @@ a.dashed {
 
 .shifted-left {
     margin-left: -29px;
+}
+
+.comment {
+    padding: 3px 0;
 }
