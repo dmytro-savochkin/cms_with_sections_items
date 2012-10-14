@@ -19,5 +19,9 @@ a.dashed {
 }
 
 .comment {
-    padding: 3px 0;
+    padding: 6px 0;
+}
+
+.user-avatar {
+    margin: 5px 5px 0px 0px;
 }

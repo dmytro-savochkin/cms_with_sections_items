@@ -32,8 +32,6 @@ class Section < ActiveRecord::Base
   # TODO: localization?
   # TODO: refactoring
 
-  # TODO: admin signout leads to user signout and vice versa
-
 
   class << self
 

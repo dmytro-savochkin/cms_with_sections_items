@@ -1,7 +1,7 @@
 %div.comment
   %div.comment-header
     %strong
-      = comment.user.name
+      = link_to user_avatar_and_name_from(comment).html_safe, comment.user.link
       = login_provider_in_brackets(comment.user)
     at
     = l comment.created_at, :format => :short

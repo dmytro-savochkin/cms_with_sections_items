@@ -1,15 +1,16 @@
 %div.comment
   %div.comment-header
-    = bracketize comment.item.name
     %strong
-      = comment.user.name
-    = login_provider_in_brackets(comment.user)
+      = link_to user_avatar_and_name_from(comment).html_safe, comment.user.link
+      = login_provider_in_brackets(comment.user)
     at
     = l comment.created_at, :format => :short
-
-    = link_to 'delete', admin_comment_path(comment),
-      :method => :delete, :remote => true, "data-type" => :json,
-      :class => %w(Comment delete), :confirm => 'Are you sure?'
-
+    in
+    = link_to comment.item.name, edit_admin_item_path(comment.item.id)
 
   %span= comment.text
+
+  %div
+    = link_to 'delete comment', admin_comment_path(comment),
+      :method => :delete, :remote => true, "data-type" => :json,
+      :class => %w(Comment delete), :confirm => 'Are you sure?'

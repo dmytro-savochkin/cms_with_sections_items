@@ -15,6 +15,16 @@ module ApplicationHelper
     "[" + text + "]"
   end
 
+  def user_avatar_and_name_from(comment)
+    link = ""
+    unless comment.user.image.empty?
+      link += image_tag(comment.user.image, :size => "50x50", :alt => "Commentator avatar", :class => %w(pull-left user-avatar))
+    end
+    link += comment.user.name.strip
+  end
+
+
+
   def link_color?(hidden)
     return "muted" if hidden
     ""

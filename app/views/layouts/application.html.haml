@@ -23,7 +23,9 @@
       .row-fluid
         .span9
           .well.sidebar-nav
-            %br
+            - if client_panel?
+              = render "layouts/client/bread_crumbs"
+
             - if flash[:success]
               #notice.message.text-success
                 = flash[:success]
@@ -34,10 +36,6 @@
                 = flash[:alert]
             - elsif flash[:warning]
               #warning.message= flash[:warning]
-
-
-            - if client_panel?
-              = render "layouts/client/bread_crumbs"
 
             = yield
 
