@@ -20,8 +20,23 @@ a.dashed {
 
 .comment {
     padding: 6px 0;
+    min-height: 50px;
+    /* lines below are for IE 6 */
+    height:auto !important;
+    height: 50px;
 }
 
 .user-avatar {
-    margin: 5px 5px 0px 0px;
+    width: 50px;
+    height: 50px;
+    margin: 5px 5px 0 0;
+}
+
+.client-item-thumb {
+    vertical-align: top;
+}
+.client-item-original {
+    max-height: 300px;
+    max-width: 200px;
+    margin: 0 10px 10px 0;
 }

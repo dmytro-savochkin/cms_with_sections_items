@@ -33,9 +33,12 @@
 %br
 
 
-= f.label :photo_full, 'Photo' + ' ' + mark_required(Item, :photo_full)
-= f.file_field :photo_full
-.text-error= @item.errors[:photo_full].join(', ')
+
+%div= f.label :photo, 'Photo' + ' ' + mark_required(Item, :photo)
+- if not @item.photo_file_name.nil? and photo_errors.empty?
+  %div= image_tag @item.photo.url
+= f.file_field :photo
+.text-error= photo_errors
 %br
 %br
 
@@ -62,4 +65,5 @@
 
 
 - unless @item.nil?
-  .text-error= errors_messages(@item.errors, [:name, :price, :manufacturer, :amount, :alias, :section_id]).join.html_safe
+  .text-error= errors_messages(@item.errors,
+    [:name, :price, :manufacturer, :amount, :alias, :section_id, :photo_file_size, :photo_content_type]).join.html_safe

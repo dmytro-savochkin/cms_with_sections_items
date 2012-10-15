@@ -18,8 +18,7 @@ group :production do
   gem 'pg'
 end
 
-#gem 'rmagick'
-gem 'carrierwave'
+gem 'paperclip'
 gem 'jquery-rails'
 
 

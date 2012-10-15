@@ -2,7 +2,7 @@ class Section < ActiveRecord::Base
   has_many :children, :class_name => 'Section', :foreign_key => 'parent_id', :order => 'position'
   belongs_to :parent, :class_name => 'Section', :foreign_key => 'parent_id'
 
-  has_many :items, :foreign_key => 'section_id', :order => 'position'
+  has_many :items, :foreign_key => 'section_id', :order => 'position', :dependent => :delete_all
 
 
   attr_accessible :name, :level, :short_name, :alias, :parent_id, :hidden, :description
@@ -230,7 +230,7 @@ class Section < ActiveRecord::Base
     section_with_descendants = self.with_descendants
     descendants_length = section_with_descendants.length
     sections_were_deleted = section_with_descendants.map do |section|
-      true if (section.items.empty? or section.items.each(&:delete)) and section.delete
+      true if section.destroy
     end
 
     if sections_were_deleted.all?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121014220020) do
+ActiveRecord::Schema.define(:version => 20121015115652) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",               :default => "", :null => false
@@ -42,13 +42,15 @@ ActiveRecord::Schema.define(:version => 20121014220020) do
     t.string   "price"
     t.string   "amount"
     t.string   "manufacturer"
-    t.string   "photo_thumb"
-    t.string   "photo_full"
     t.text     "description"
     t.boolean  "on_main_page"
     t.boolean  "hidden"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "sections", :force => true do |t|

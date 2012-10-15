@@ -2,16 +2,26 @@ class Item < ActiveRecord::Base
   belongs_to :section
   has_many :comments, :foreign_key => 'item_id', :order => 'created_at', :dependent => :delete_all
 
-  mount_uploader :photo_full, ItemPhotoUploader
 
   before_validation :set_position_unless_set
   before_destroy :move_back_next_items
 
 
   attr_accessible :name, :alias, :section_id, :amount, :manufacturer,
-                  :photo_thumb, :photo_full, :description, :on_main_page,
+                  :photo, :description, :on_main_page,
                   :hidden, :position, :price, :id, :created_at, :updated_at
+
   attr_accessor :can_be_shifted, :full_path, :bread_crumbs, :parent_section_path
+
+  has_attached_file :photo, :styles => { :thumb => "200x200>" },
+                    :path => ':rails_root/public/uploads/:class/:attachment/:style/photo_:id.:extension',
+                    :url => '/uploads/:class/:attachment/:style/photo_:id.:extension',
+                    :default_url => "/images/default_item_photo.png"
+  validates_attachment :photo,
+                       :size => { :in => 0..500.kilobytes }
+  validates_attachment_content_type :photo,
+                                    :content_type => %w(image/jpeg image/png image/gif),
+                                    :message => "is not an acceptable image file"
 
 
   validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => "alias must consist only english 

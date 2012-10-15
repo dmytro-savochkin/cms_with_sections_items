@@ -1,5 +1,11 @@
 %h1= @item.name.titleize
 
+- unless @item.photo_file_name.nil?
+  %div.pull-left
+    = image_tag(@item.photo.url(:original), :class => 'client-item-original')
+
+
+
 %div.price
   %strong Price:
   = @item.price
@@ -10,9 +16,13 @@
   %strong Manufacturer:
   = @item.manufacturer
 
-%div.description
-  = @item.description
 
+
+%div.description
+  = simple_format(@item.description)
+
+
+%div.clearfix
 
 
 %h2 Comments

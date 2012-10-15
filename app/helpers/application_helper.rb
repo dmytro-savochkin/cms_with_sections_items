@@ -18,7 +18,7 @@ module ApplicationHelper
   def user_avatar_and_name_from(comment)
     link = ""
     unless comment.user.image.empty?
-      link += image_tag(comment.user.image, :size => "50x50", :alt => "Commentator avatar", :class => %w(pull-left user-avatar))
+      link += image_tag(comment.user.image, :alt => "Commentator avatar", :class => %w(pull-left user-avatar))
     end
     link += comment.user.name.strip
   end
@@ -33,6 +33,16 @@ module ApplicationHelper
   def mark_required(class_object, attribute)
     return "*" if class_object.validators_on(attribute).map(&:class).include? ActiveModel::Validations::PresenceValidator
     ""
+  end
+
+
+  def photo_errors
+    photo_errors = []
+    @item.errors.keys.select{|e| e.to_s.include?("photo_")}.each do |key|
+      photo_errors << @item.errors.messages[key].join(", ").to_s
+    end
+    return "" if photo_errors.empty?
+    "Photo " + photo_errors.join(', ')
   end
 
   def errors_messages(errors, except)
