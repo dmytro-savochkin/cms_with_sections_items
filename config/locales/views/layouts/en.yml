@@ -1,0 +1,29 @@
+en:
+  layouts:
+    admin:
+      comments:
+        show:
+          at: 'at'
+          in_item: 'in'
+          delete_comment: 'delete comment'
+          delete_confirm: 'Are you sure?'
+
+      login_panel:
+        log_out: 'log out'
+      right_menu:
+        sections_page: 'sections page'
+        items_page: 'items page'
+        last_comments: 'last comments'
+
+    client:
+      comments:
+        new:
+          add_comment_as: 'Add new comment as'
+          post_button: 'Post it'
+          post_button_disabled: 'Please wait...'
+
+      bread_crumbs:
+        home: 'Home'
+      login_panel:
+        sign_out: "Sign out"
+        sign_in: "Sign in"

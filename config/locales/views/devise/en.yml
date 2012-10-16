@@ -1,0 +1,7 @@
+en:
+  devise:
+    sessions:
+      new:
+        user_name: 'user name'
+        password: 'password'
+        login_button: 'log in'

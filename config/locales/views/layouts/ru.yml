@@ -1,0 +1,29 @@
+ru:
+  layouts:
+    admin:
+      comments:
+        show:
+          at: 'в'
+          in_item: 'для товара'
+          delete_comment: 'удалить комментарий'
+          delete_confirm: 'Вы уверены?'
+
+      login_panel:
+        log_out: 'выйти'
+      right_menu:
+        sections_page: 'разделы'
+        items_page: 'товары'
+        last_comments: 'последние комментарии'
+
+    client:
+      comments:
+        new:
+          add_comment_as: 'Добавить комментарий как'
+          post_button: 'Запостить'
+          post_button_disabled: 'Подождите...'
+
+      bread_crumbs:
+        home: 'Главная'
+      login_panel:
+        sign_out: "Выйти"
+        sign_in: "Войти"

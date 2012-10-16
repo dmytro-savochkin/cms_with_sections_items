@@ -6,7 +6,7 @@ class Client::Users::OmniauthCallbacksController < Devise::OmniauthCallbacksCont
     @user = User.find_oauth(provider, request.env["omniauth.auth"], current_user)
 
     if @user.persisted?
-      flash[:success] = "You have successfully logged in as #{@user.name}"
+      flash[:success] = t 'controllers.client.omniath_callbacks.login_success', :user => @user.name
       sign_in_and_redirect @user, :event => :authentication
     else
       session["devise."+provider+"_data"] = request.env["omniauth.auth"]

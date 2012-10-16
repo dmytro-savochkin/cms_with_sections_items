@@ -1,11 +1,11 @@
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
 
   = f.text_field :email
-  = label_tag :email, 'user name'
+  = label_tag :email, t('.user_name')
   %br
 
   = f.password_field :password
-  = label_tag :password, 'password'
+  = label_tag :password, t('.password')
   %br
 
-  = submit_tag 'log in'
+  = submit_tag t('.login_button')

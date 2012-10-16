@@ -1,7 +1,26 @@
 ru:
   models:
     item:
-      wrong_photo_content_type: "не является допустимым форматом"
+      comment:
+        user:
+          avatar:
+            alt: "Аватар комментатора"
+
+      comments: 'Комментарии'
+
+
+      name: 'Имя'
+      alias: 'Алиас'
+      parent: 'Родительский раздел'
+      photo: 'Фото'
+      description: 'Описание'
+      show_on_main_page: 'Показывать на главной'
+      hidden: 'Скрыть'
+      price: 'Цена'
+      amount: 'Количество'
+      manufacturer: 'Производитель'
+
+      wrong_photo_content_type: "залито с неподходящим форматом"
       wrong_alias: "алиас должен содержать только английские буквы, цифры и знак подчеркивания"
       wrong_alias_uniqueness: "алиас должен иметь уникальное название среди прочих предметов данного раздела"
 

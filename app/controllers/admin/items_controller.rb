@@ -24,10 +24,10 @@ class Admin::ItemsController < ApplicationController
     @item.update_and_shift params[:item]
 
     if @item.valid?
-      flash[:success] = "#{@item[:name]} was successfully updated."
+      flash[:success] = t 'controllers.admin.items.update.success', :item_name => @item[:name]
       redirect_to admin_items_path
     else
-      flash.now[:error] = "Some errors occurred."
+      flash.now[:error] = t 'controllers.admin.neutral_error'
       @tabulated_sections = Section.tabulated_sections
       render :edit
     end
@@ -44,10 +44,10 @@ class Admin::ItemsController < ApplicationController
     @item = Item.create(params[:item])
 
     if @item.save
-      flash[:success] = "#{@item[:name]} was successfully created."
+      flash[:success] = t 'controllers.admin.items.create.success', :item_name => @item[:name]
       redirect_to admin_items_path
     else
-      flash.now[:error] = "Some errors occurred."
+      flash.now[:error] = t 'controllers.admin.neutral_error'
       @tabulated_sections = Section.tabulated_sections
       render :new
     end
@@ -58,9 +58,9 @@ class Admin::ItemsController < ApplicationController
     @item = Item.find params[:id]
 
     if @item.destroy
-      flash[:success] = "Item '#{@item.name}' has been deleted."
+      flash[:success] = t 'controllers.admin.items.destroy.success', :item_name => @item[:name]
     else
-      flash[:error] = "Some error occurred during deletion of '#{@item.name}'."
+      flash[:error] = t 'controllers.admin.items.destroy.error', :item_name => @item[:name]
     end
     redirect_to admin_items_path
   end
@@ -82,7 +82,8 @@ class Admin::ItemsController < ApplicationController
         end
       end
     else
-      flash[:error] = "Item '#{@item[:name]}' can not be shifted #{params[:direction]}."
+      flash[:error] = t 'controllers.admin.items.shift.error',
+                        :item_name => @item[:name], :direction => t('direction.' + params[:direction])
       redirect_to admin_items_path
     end
   end

@@ -1,25 +1,25 @@
-= link_to 'back', admin_items_path
+= link_to t('back'), admin_items_path
 
-%h1 Edit Item
+%h1= t('.edit_item').titleize
 
 = form_for @item, :url => admin_item_path(@item), :method => :put do |f|
 
   = render "layouts/admin/item_form", :f => f
 
   %br
-  = submit_tag 'Update Item'
+  = submit_tag t('.update_item')
 
   %br
   %br
-  = link_to 'delete item', admin_item_path(@item), :method => :delete, :confirm => 'Are you sure?'
+  = link_to t('.delete'), admin_item_path(@item), :method => :delete, :confirm => t('.delete_confirm')
 
   %br
   %br
 
   - unless @item.comments.empty?
-    %h2 Comments
+    %h2= t('models.item.comments').capitalize
 
     - @item.comments.each_with_index do |comment, index|
-      = render 'layouts/admin/show_comment', :comment => comment, :index => index
+      = render 'layouts/admin/comments/show', :comment => comment, :index => index
 
-= render 'layouts/admin/comment_delete_js'
+= render 'layouts/admin/comments/delete.js'

@@ -7,13 +7,13 @@
 
 
 %div.price
-  %strong Price:
+  %strong= t('models.item.price').capitalize + ':'
   = @item.price
 %div.amount
-  %strong Amount:
+  %strong= t('models.item.amount').capitalize + ':'
   = @item.amount
 %div.manufacturer
-  %strong Manufacturer:
+  %strong= t('models.item.manufacturer').capitalize + ':'
   = @item.manufacturer
 
 
@@ -23,21 +23,23 @@
 
 
 %div.clearfix
+%br
 
 
-%h2 Comments
+%h2= t '.comments'
 
 - if @item.comments.empty?
-  %div There are no comments yet. Be the first!
+  %div
+    = t '.no_comments_message'
 - else
   %div.comments
   - @item.comments.each_with_index do |comment, index|
-    = render "layouts/client/show_comment", :comment => comment, :index => index
+    = render "layouts/client/comments/show", :comment => comment, :index => index
 
 %br
 
 - if user_signed_in?
-  = render "layouts/client/new_comment"
+  = render "layouts/client/comments/new"
 - else
   %div
-    You need to be logged in for adding comments.
+    = t '.log_in_to_post'

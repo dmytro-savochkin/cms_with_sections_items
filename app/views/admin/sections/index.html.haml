@@ -1,8 +1,8 @@
 %br
 
-= link_to 'Create new section', new_admin_section_path
+= link_to t('.create_new'), new_admin_section_path
 
-%h1 All Sections
+%h1= t('.all_sections').titleize
 
 - place_list_tags_for(@menu_list).each do |element|
   = element unless element.kind_of? Section

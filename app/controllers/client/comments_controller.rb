@@ -13,9 +13,9 @@ class Client::CommentsController < ApplicationController
     )
 
     if @comment.save
-      flash[:success] = "Comment was successfully created."
+      flash[:success] = t 'controllers.client.comments.create.success'
     else
-      flash[:error] = "Comment cannot be created. Please check your text message."
+      flash[:error] = t 'controllers.client.comments.create.error'
     end
 
     redirect_to request.env["HTTP_REFERER"]

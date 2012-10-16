@@ -1,9 +1,9 @@
 - if user_signed_in?
   = user_avatar(current_user)
   %div#current-user-name= truncate(user_name(current_user), :length => 22)
-  %div= link_to "Sign out " + login_provider_in_brackets, destroy_user_session_path, :method => :delete
+  %div= link_to t('.sign_out') + " " + login_provider_in_brackets, destroy_user_session_path, :method => :delete
 - else
-  = link_to_function "Sign in", "$('ul#login_links').toggle(150)", :class => %w(dashed)
+  = link_to_function t('.sign_in'), "$('ul#login_links').toggle(150)", :class => %w(dashed)
   %ul#login_links.hidden.ul-marked
     %li= link_to "Facebook", user_omniauth_authorize_path(:facebook)
     %li= link_to "Twitter", user_omniauth_authorize_path(:twitter)

@@ -19,11 +19,11 @@ class Admin::CommentsController < ApplicationController
     respond_to do |format|
       user_name = @comment.user.name.humanize
       if @comment.destroy
-        message = user_name + "'s comment has been deleted."
+        message = t 'controllers.admin.comments.delete.success', :user => user_name
         flash_argument = :success
         deleted = true
       else
-        message = "Some error occurred during deletion of #{user_name}'s comment."
+        message = t 'controllers.admin.comments.delete.error', :user => user_name
         flash_argument = :error
         deleted = false
       end

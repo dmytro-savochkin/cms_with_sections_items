@@ -1,0 +1,11 @@
+ru:
+  client:
+    items:
+      show:
+        comments: 'Комментарии'
+        no_comments_message: "Комментариев пока. Напишите первый!"
+        log_in_to_post: "Вам нужно авторизваться для того чтобы писать комментарии."
+
+    sections:
+      index:
+        popular_items: 'Популярные товары'

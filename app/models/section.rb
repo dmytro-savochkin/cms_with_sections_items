@@ -5,7 +5,7 @@ class Section < ActiveRecord::Base
   has_many :items, :foreign_key => 'section_id', :order => 'position', :dependent => :delete_all
 
 
-  attr_accessible :name, :level, :short_name, :alias, :parent_id, :hidden, :description
+  attr_accessible :name, :level, :alias, :parent_id, :hidden, :description
   attr_accessor :can_be_shifted, :full_path, :bread_crumbs
 
 
@@ -18,7 +18,6 @@ class Section < ActiveRecord::Base
             :length => {:in => 1..40},
             :format => {:with => ALIAS_MASK, :message => I18n.t('models.section.wrong_alias')}
   validates_length_of :name, :in => 1..120
-  validates_length_of :short_name, :maximum => 40
   validates_length_of :description, :maximum => 3000
   validates_presence_of :name, :position, :level, :alias
   validates_uniqueness_of :alias, :scope => :parent_id, :message => I18n.t('models.section.wrong_alias_uniqueness')
@@ -29,8 +28,9 @@ class Section < ActiveRecord::Base
 
   # TODO: write unit tests for model and controller after MacOS
   # TODO: maybe CarrierWave after MacOS
-  #! TODO: localization? and default_url_options?
+  #! TODO: localization? and default_url_options? maybe fields for rus names in models/db?
   # TODO: refactoring
+  # heroku, github
 
 
   class << self

@@ -1,0 +1,7 @@
+ru:
+  devise:
+    sessions:
+      new:
+        user_name: 'имя'
+        password: 'пароль'
+        login_button: 'войти'

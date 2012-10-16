@@ -1,0 +1,43 @@
+en:
+  controllers:
+
+    client:
+      comments:
+        create:
+          success: "Comment was successfully posted."
+          error: "Comment cannot be posted. Please check your text message."
+
+      omniath_callbacks:
+        login_success: "You have successfully logged in as %{user}"
+
+
+
+    admin:
+      neutral_error: "Some error occurred."
+
+      comments:
+        delete:
+          success: "%{user}'s comment has been deleted."
+          error: "Some error occurred during deletion of %{user}'s comment."
+
+      items:
+        update:
+          success: "%{item_name} was successfully updated."
+        create:
+          success: "%{item_name} was successfully created."
+        destroy:
+          success: "Item %{item_name} has been deleted."
+          error: "Some error occurred during deletion of %{item_name}."
+        shift:
+          error: "Item %{item_name} can not be shifted %{direction}."
+
+      sections:
+        update:
+          success: "%{section_name} was successfully updated."
+        create:
+          success: "%{section_name} was successfully created."
+        destroy:
+          success: "Section %{section_name} has been deleted."
+          error: "Some error occurred during deletion of %{section_name}."
+        shift:
+          error: "Section %{section_name} can not be shifted %{direction}."

@@ -14,7 +14,7 @@
       .navbar-inner
         .container-fluid
           .row-fluid
-            = link_to 'CMS', root_path, :class => %w(brand)
+            = link_to t('app_name').titleize, root_path, :class => %w(brand)
             = render 'layouts/language_change'
 
     .container-fluid

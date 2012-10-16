@@ -1,17 +1,17 @@
-= link_to 'back', admin_sections_path
+= link_to t('back'), admin_sections_path
 
-%h1 Edit Section
+%h1= t('.edit').titleize
 
 = form_for @section, :url => admin_section_path(@section), :method => :put do |f|
 
   = render "layouts/admin/section_form", :f => f
 
   %br
-  = submit_tag 'Update Section'
+  = submit_tag t('.update')
 
 
   %br
   %br
   %br
-  = link_to 'delete section branch', admin_section_path(@section), :method => :delete, :confirm => 'Are you sure? The whole section branch will be deleted completely.'
+  = link_to t('.delete'), admin_section_path(@section), :method => :delete, :confirm => t('.delete_confirm')
 

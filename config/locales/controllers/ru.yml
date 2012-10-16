@@ -1,0 +1,43 @@
+ru:
+  controllers:
+
+    client:
+      comments:
+        create:
+          success: "Комментарий отправлен."
+          error: "Не удается отправить комментарий. Пожалуйста проверьте текст сообщения."
+
+      omniath_callbacks:
+        login_success: "Вы вошли в систему как %{user}"
+
+
+
+    admin:
+      neutral_error: "Произошла ошибка."
+
+      comments:
+        delete:
+          success: " Комментарий пользователя %{user} удален."
+          error: "Произошла ошибка при удалении комментария от %{user}."
+
+      items:
+        update:
+          success: "%{item_name} обновлен."
+        create:
+          success: "%{item_name} создан."
+        destroy:
+          success: "Товар %{item_name} удален."
+          error: "Произошла ошибка при удалении %{item_name}."
+        shift:
+          error: "Товар %{item_name} не может быть сдвинут %{direction}."
+
+      sections:
+        update:
+          success: "%{section_name} обновлен."
+        create:
+          success: "%{section_name} создан."
+        destroy:
+          success: "Раздел %{section_name} удален."
+          error: "Произошла ошибка при удалении %{section_name}."
+        shift:
+          error: "Раздел %{section_name} не может быть сдвинут %{direction}."

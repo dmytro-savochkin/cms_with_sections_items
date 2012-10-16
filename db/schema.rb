@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015115652) do
+ActiveRecord::Schema.define(:version => 20121016230518) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",               :default => "", :null => false
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20121015115652) do
 
   create_table "sections", :force => true do |t|
     t.string   "name"
-    t.string   "short_name"
     t.string   "alias"
     t.integer  "level"
     t.integer  "parent_id"

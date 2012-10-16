@@ -1,10 +1,10 @@
-= link_to 'back', admin_items_path
+= link_to t('back'), admin_items_path
 
-%h1 Create Item
+%h1= t('.create').titleize
 
 = form_for @item, :url => admin_items_path, :method => :post do |f|
 
   = render "layouts/admin/item_form", :f => f
 
   %br
-  = submit_tag 'Create Item'
+  = submit_tag t('.create')

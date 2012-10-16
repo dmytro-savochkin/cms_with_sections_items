@@ -29,10 +29,10 @@ class Admin::SectionsController < ApplicationController
     @section = Section.update_with_shift(params[:section], params[:id])
 
     if @section.valid?
-      flash[:success] = "#{@section.name} was successfully updated."
+      flash[:success] = t 'controllers.admin.sections.update.success', :section_name => @section[:name]
       redirect_to admin_sections_path
     else
-      flash.now[:error] = "Some errors occurred."
+      flash.now[:error] = t 'controllers.admin.neutral_error'
       @tabulated_sections = Section.tabulated_without_descendants_of(@section)
       render :edit
     end
@@ -49,10 +49,10 @@ class Admin::SectionsController < ApplicationController
     @section = Section.create_with_shift(params[:section])
 
     if @section.valid?
-      flash[:success] = "#{@section.name} was successfully created."
+      flash[:success] = t 'controllers.admin.sections.create.success', :section_name => @section[:name]
       redirect_to admin_sections_path
     else
-      flash.now[:error] = "Some errors occurred."
+      flash.now[:error] = t 'controllers.admin.neutral_error'
       @tabulated_sections = Section.tabulated_sections
       render :new
     end
@@ -62,9 +62,9 @@ class Admin::SectionsController < ApplicationController
   def destroy
     @section = Section.find params[:id]
     if @section.destroy_with_shift
-      flash[:success] = "Section '#{@section.name}' has been deleted."
+      flash[:success] = t 'controllers.admin.sections.destroy.success', :section_name => @section[:name]
     else
-      flash[:error] = "Some error occurred during deletion of '#{@section.name}'."
+      flash[:error] = t 'controllers.admin.sections.destroy.error', :section_name => @section[:name]
     end
     redirect_to admin_sections_path
   end
@@ -86,7 +86,8 @@ class Admin::SectionsController < ApplicationController
         end
       end
     else
-      flash[:error] = "Section '#{@section[:name]}' can not be shifted #{params[:direction]}."
+      flash[:error] = t 'controllers.admin.sections.shift.error',
+                        :section_name => @section[:name], :direction => t('direction.' + params[:direction])
       redirect_to admin_sections_path
     end
   end

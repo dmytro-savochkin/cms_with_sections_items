@@ -20,14 +20,6 @@ class Client::SectionsController < ApplicationController
   def show
     @section = Section.find_by_path(request.path) || not_found
     not_found if @section.hidden
-
-    logger.info request.path
-    logger.info request.path
-    logger.info request.path
-    logger.info request.path
-    logger.info request.path
-    logger.info request.path
-
     @section_items = @section.items.each {|item| item.parent_section_path = request.path[1..-1]}
 
     menu_list

@@ -1,6 +1,13 @@
 en:
   models:
     section:
+      name: 'name'
+      alias: 'alias'
+      parent: 'parent'
+      description: 'description'
+      hidden: 'hidden'
+
+
       reserved_alias: "alias '%{value}' is reserved."
       wrong_alias: "alias must consist only english letters, digits and underscores"
       wrong_alias_uniqueness: "alias must be unique within the scope of its parent section"

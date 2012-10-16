@@ -1,8 +1,8 @@
 %br
 
-= link_to 'Create new item', new_admin_item_path
+= link_to t('.create_new'), new_admin_item_path
 
-%h1 All Items
+%h1= t('.all_items').titleize
 
 - place_list_tags_for(@menu_list).each do |element|
   - if element.kind_of? Section

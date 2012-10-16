@@ -1,4 +1,12 @@
 ru:
+  app_name: 'Лучший Магазин'
+
+  direction:
+    up: "вверх"
+    down: "вниз"
+
+  back: 'назад'
+
   date:
     abbr_day_names:
     - Вс
@@ -246,7 +254,7 @@ ru:
     formats:
       default: ! '%a, %d %b %Y, %H:%M:%S %z'
       long: ! '%d %B %Y, %H:%M'
-      short: ! '%d %b, %H:%M'
+      short: ! '%H:%M, %d.%m.%Y'
     pm: вечера
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

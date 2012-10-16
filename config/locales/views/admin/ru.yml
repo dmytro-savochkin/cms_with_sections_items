@@ -1,0 +1,30 @@
+ru:
+  admin:
+    comments:
+      index:
+        last_comments: 'Последние комментарии'
+        no_comments: 'Комментариев пока нет.'
+
+    items:
+      edit:
+        delete: 'удалить товар'
+        edit_item: 'Редактировать товар'
+        update_item: 'Обновить товар'
+        delete_confirm: 'Вы уверены?'
+      index:
+        create_new: 'Создать товар'
+        all_items: 'Все товары'
+      new:
+        create: 'Создать товар'
+
+    sections:
+      edit:
+        update: 'Обновить раздел'
+        edit: 'Редактировать раздел'
+        delete: 'удалить раздел и потомков'
+        delete_confirm: 'Вы уверены? Вся ветка разделов будет удалена.'
+      index:
+        create_new: 'Создать новый раздел'
+        all_sections: 'Все разделы'
+      new:
+        create: 'Создать раздел'

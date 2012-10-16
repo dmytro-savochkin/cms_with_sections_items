@@ -1,15 +1,15 @@
 %br
 
-%h1 Last comments
+%h1= t '.last_comments'
 
 - if @comments.empty?
-  %div No comments yet.
+  %div= t '.no_comments'
 
 - @comments.each_with_index do |comment, index|
-  = render 'layouts/admin/show_comment', :comment => comment, :index => index
+  = render 'layouts/admin/comments/show', :comment => comment, :index => index
 
 %div#paginator
   = paginate @comments, :window => 2
 
-= render 'layouts/admin/comment_delete_js'
+= render 'layouts/admin/comments/delete.js'
 

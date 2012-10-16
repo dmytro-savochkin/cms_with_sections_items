@@ -1,0 +1,11 @@
+en:
+  client:
+    items:
+      show:
+        comments: 'Comments'
+        no_comments_message: "There are no comments yet. Be the first!"
+        log_in_to_post: "You need to be logged in for adding comments."
+
+    sections:
+      index:
+        popular_items: 'Popular items'

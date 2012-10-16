@@ -23,7 +23,7 @@ module ApplicationHelper
 
   def user_avatar(user)
     unless user.image.empty?
-      return image_tag(user.image, :alt => "Commentator avatar", :class => %w(pull-left user-avatar))
+      return image_tag(user.image, :alt => t('models.item.comment.user.avatar.alt'), :class => %w(pull-left user-avatar))
     end
     ""
   end
@@ -60,7 +60,7 @@ module ApplicationHelper
       photo_errors << @item.errors.messages[key].join(", ").to_s
     end
     return "" if photo_errors.empty?
-    "Photo " + photo_errors.join(', ')
+    t('models.item.photo') + " " + photo_errors.join(', ')
   end
 
   def errors_messages(errors, except)

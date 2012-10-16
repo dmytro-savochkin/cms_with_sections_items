@@ -1,0 +1,30 @@
+en:
+  admin:
+    comments:
+      index:
+        last_comments: 'Last comments'
+        no_comments: 'No comments yet.'
+
+    items:
+      edit:
+        delete: 'delete item'
+        edit_item: 'Edit item'
+        update_item: 'Update item'
+        delete_confirm: 'Are you sure?'
+      index:
+        create_new: 'Create new item'
+        all_items: 'All items'
+      new:
+        create: 'Create item'
+
+    sections:
+      edit:
+        update: 'Update section'
+        edit: 'Edit section'
+        delete: 'delete section branch'
+        delete_confirm: 'Are you sure? The whole section branch will be deleted completely.'
+      index:
+        create_new: 'Create new section'
+        all_sections: 'All sections'
+      new:
+        create: 'Create section'

@@ -1,4 +1,4 @@
-Add new comment as
+= t '.add_comment_as'
 %strong
   - if user_signed_in?
     = current_user.name
@@ -11,4 +11,4 @@ Add new comment as
 
     = f.hidden_field :item_id, :value => @item.id
 
-    = submit_tag 'Post it', :disable_with => "Please wait..."
+    = submit_tag t('.post_button'), :disable_with => t('.post_button_disabled')
