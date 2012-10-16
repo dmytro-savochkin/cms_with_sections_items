@@ -15,13 +15,31 @@ module ApplicationHelper
     "[" + text + "]"
   end
 
-  def user_avatar_and_name_from(comment)
+  def user_avatar_and_name(user)
     link = ""
-    unless comment.user.image.empty?
-      link += image_tag(comment.user.image, :alt => "Commentator avatar", :class => %w(pull-left user-avatar))
-    end
-    link += comment.user.name.strip
+    link += user_avatar(user)
+    link += user_name(user)
   end
+
+  def user_avatar(user)
+    unless user.image.empty?
+      return image_tag(user.image, :alt => "Commentator avatar", :class => %w(pull-left user-avatar))
+    end
+    ""
+  end
+
+  def user_name(user)
+    user.name.strip
+  end
+
+
+  def breaking_word_wrap(txt, col = 80)
+    txt.gsub(/(.{1,#{col}})( +|$\n?)|(.{1,#{col}})/, "\\1\\3\n")
+  end
+
+
+
+
 
 
 

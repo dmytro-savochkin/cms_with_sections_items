@@ -3,7 +3,7 @@ class Client::CommentsController < ApplicationController
 
 
   def create
-    @comment = Comment.create(
+    @comment = Comment.new(
       text:params[:comment][:text],
       visible:true,
       item_id:params[:comment][:item_id],
@@ -15,7 +15,7 @@ class Client::CommentsController < ApplicationController
     if @comment.save
       flash[:success] = "Comment was successfully created."
     else
-      flash.now[:error] = "Some errors occurred."
+      flash[:error] = "Comment cannot be created. Please check your text message."
     end
 
     redirect_to request.env["HTTP_REFERER"]

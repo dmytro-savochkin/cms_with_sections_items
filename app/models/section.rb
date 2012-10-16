@@ -14,22 +14,22 @@ class Section < ActiveRecord::Base
   FORBIDDEN_ALIASES = %w(item admin)
 
   validates :alias,
-            :exclusion => { :in => FORBIDDEN_ALIASES, :message => "alias '%{value}' is reserved." },
+            :exclusion => { :in => FORBIDDEN_ALIASES, :message => I18n.t('models.section.reserved_alias') },
             :length => {:in => 1..40},
-            :format => {:with => ALIAS_MASK, :message => "alias must consist only english letters, digits and underscores"}
+            :format => {:with => ALIAS_MASK, :message => I18n.t('models.section.wrong_alias')}
   validates_length_of :name, :in => 1..120
   validates_length_of :short_name, :maximum => 40
   validates_length_of :description, :maximum => 3000
   validates_presence_of :name, :position, :level, :alias
-  validates_uniqueness_of :alias, :scope => :parent_id, :message => "alias must be unique within the scope of its parent section"
+  validates_uniqueness_of :alias, :scope => :parent_id, :message => I18n.t('models.section.wrong_alias_uniqueness')
 
 
 
 
 
   # TODO: write unit tests for model and controller after MacOS
-  # TODO: items' file upload after MacOS, customize items' lists in section pages
-  # TODO: localization?
+  # TODO: maybe CarrierWave after MacOS
+  #! TODO: localization? and default_url_options?
   # TODO: refactoring
 
 
@@ -169,7 +169,7 @@ class Section < ActiveRecord::Base
 
     def split_section_path(path)
       regexp_match = Regexp.new('[^/' + Section::ALIAS_ALLOWABLE_SYMBOLS + ']')
-      path.gsub(regexp_match, '').split('/').reject {|e| e.empty?}
+      path.split('?')[0].gsub(regexp_match, '').split('/').reject {|e| e.empty?}
     end
 
 

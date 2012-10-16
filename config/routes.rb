@@ -52,7 +52,7 @@ Maxfoods::Application.routes.draw do
 
   scope :module => "client" do
     root :to => 'sections#index'
-    match '*section_path/item/:item_name' => 'items#show'
-    match '*section_path' => 'sections#show'
+    match '*section_path/item/:item_name' => 'items#show', :as => :item
+    match '*section_path' => 'sections#show', :as => :section
   end
 end

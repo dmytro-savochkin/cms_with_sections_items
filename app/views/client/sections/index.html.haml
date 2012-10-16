@@ -1,3 +1,6 @@
 %h1 Popular items
+%div#items
+  = render "layouts/client/items/cycle", :items => @items_on_main_page
 
-= render "layouts/client/items/cycle", :items => @items_on_main_page
+%div#paginator
+  = paginate @items_on_main_page

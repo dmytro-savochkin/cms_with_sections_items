@@ -2,8 +2,8 @@
   = element unless element.kind_of? Section
   - if element.kind_of? Section
     - unless element.hidden
-      - if request.fullpath != element.full_path
-        = link_to element.name, element.full_path, :class => ("muted" if not @section.nil? and @section.id == element.id)
+      - if request.path != element.full_path
+        = link_to element.name, section_path(element.full_path), :class => ("muted" if not @section.nil? and @section.id == element.id)
       - else
         = element.name
 

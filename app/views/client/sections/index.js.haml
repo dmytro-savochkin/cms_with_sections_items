@@ -1,0 +1,2 @@
+$('#items').html('#{escape_javascript(render "layouts/client/items/cycle", :items => @items_on_main_page)}');
+$('#paginator').html('#{escape_javascript(paginate(@items_on_main_page, :remote => true).to_s)}');

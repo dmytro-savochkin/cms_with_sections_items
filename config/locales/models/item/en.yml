@@ -1,0 +1,8 @@
+en:
+  models:
+    item:
+      wrong_photo_content_type: "is not an acceptable image file"
+      wrong_alias: "alias must consist only english letters, digits and underscore sign"
+      wrong_alias_uniqueness: "alias must be unique within the scope of its parent section"
+
+      wrong_position: "is invalid."

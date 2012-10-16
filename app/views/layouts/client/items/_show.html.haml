@@ -1,5 +1,5 @@
 %div
-  %a{:href => item.parent_section_path + item_path(item) }
+  = link_to item_path(item.parent_section_path, item.alias) do
     = item.name.titleize
     %br
     = image_tag(item.photo.url(:thumb), :height => 200)

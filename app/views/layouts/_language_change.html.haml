@@ -1,0 +1,5 @@
+- if I18n.locale.to_s == "ru"
+  = link_to "english", current_path_for('en'), :class => %w(language-link)
+- if I18n.locale.to_s == "en"
+  = link_to "русский", current_path_for('ru'), :class => %w(language-link)
+

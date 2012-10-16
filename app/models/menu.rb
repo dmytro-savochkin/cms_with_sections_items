@@ -87,7 +87,7 @@ class Menu < ActiveRecord::Base
         menu_element.can_be_shifted = {:up => false, :down => false}
         menu_element.can_be_shifted[:up] = true if siblings_exist?(tree[0...index], level, parent)
         menu_element.can_be_shifted[:down] = true if siblings_exist?(tree[(index+1)...tree.length], level, parent)
-        menu_element.full_path = '/' + tree[index].drop(1).map{|e|e[:alias]}.join('/')
+        menu_element.full_path = tree[index].drop(1).map{|e|e[:alias]}.join('/')
         menu_element.bread_crumbs = tree[index].drop(1).map{|e|e[:name]}
       end
 

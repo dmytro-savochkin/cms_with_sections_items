@@ -5,5 +5,6 @@
       %li.active= element.titleize
     - else
       %li
-        = link_to element.titleize, link_to_nth_element_of(index, request.fullpath)
+        = link_to element.titleize, link_to_nth_element_of(index, request.path)
         %span.divider /
+        -#section_path(element.full_path)

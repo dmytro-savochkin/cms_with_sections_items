@@ -72,7 +72,6 @@ GEM
     erubis (2.7.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
-    ffi (1.1.5)
     ffi (1.1.5-x86-mingw32)
     gherkin (2.11.5-x86-mingw32)
       json (>= 1.4.6)
@@ -88,6 +87,9 @@ GEM
     json (1.7.5)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     libwebsocket (0.1.5)
       addressable
     mail (2.4.4)
@@ -210,6 +212,7 @@ DEPENDENCIES
   devise
   haml
   jquery-rails
+  kaminari
   oauth2
   omniauth
   omniauth-facebook

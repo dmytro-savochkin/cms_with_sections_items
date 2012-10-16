@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :set_locale
+
   rescue_from ActionController::RoutingError, :with => :render_404
 
 
@@ -28,6 +30,18 @@ class ApplicationController < ActionController::Base
 
   def menu_list
     @menu_list = Menu.without_items
+  end
+
+  def set_locale
+    I18n.locale = params[:locale]
+  end
+
+  def default_url_options(options = {})
+    logger.debug options.inspect
+    if I18n.locale != I18n.default_locale
+      return { :locale => I18n.locale }
+    end
+    {}
   end
 
 

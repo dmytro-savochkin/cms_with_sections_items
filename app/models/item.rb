@@ -3,7 +3,10 @@ class Item < ActiveRecord::Base
   has_many :comments, :foreign_key => 'item_id', :order => 'created_at', :dependent => :delete_all
 
 
-  before_validation :set_position_unless_set
+  paginates_per 12
+
+
+  before_validation :set_position_if_not_set
   before_destroy :move_back_next_items
 
 
@@ -21,11 +24,10 @@ class Item < ActiveRecord::Base
                        :size => { :in => 0..500.kilobytes }
   validates_attachment_content_type :photo,
                                     :content_type => %w(image/jpeg image/png image/gif),
-                                    :message => "is not an acceptable image file"
+                                    :message => I18n.t('models.item.wrong_photo_content_type')
 
 
-  validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => "alias must consist only english 
-letters, digits and underscore sign"
+  validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => I18n.t('models.item.wrong_alias')
   validates_length_of :alias, :in => 1..40
   validates_length_of :name, :in => 1..120
   validates_length_of :price, :in => 1..30
@@ -33,8 +35,7 @@ letters, digits and underscore sign"
   validates_length_of :amount, :maximum => 120
   validates_length_of :description, :maximum => 1200
   validates_presence_of :name, :alias, :position, :price, :section_id
-  validates_uniqueness_of :alias, :scope => :section_id, :message => "alias must be unique within 
-the scope of its parent section"
+  validates_uniqueness_of :alias, :scope => :section_id, :message => I18n.t('models.item.wrong_alias_uniqueness')
 
 
 
@@ -93,11 +94,11 @@ the scope of its parent section"
 
 
 
-  def set_position_unless_set
+  def set_position_if_not_set
     if self[:position].nil?
       self[:position] = Item.where(:section_id => self[:section_id]).maximum('position').to_i + 1
       unless self.valid?
-        errors[:position] = "is invalid."
+        errors[:position] = I18n.t('models.item.wrong_position')
         return false
       end
     end

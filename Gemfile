@@ -12,12 +12,14 @@ group :development, :test do
   gem 'simplecov'
 end
 
-gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
-
 group :production do
   gem 'pg'
 end
 
+gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git", :branch => "static"
+
+
+gem 'kaminari'
 gem 'paperclip'
 gem 'jquery-rails'
 

@@ -4,7 +4,7 @@ class Client::ItemsController < ApplicationController
   end
 
   def show
-    section_path, item_alias = Item.split_item_path request.fullpath
+    section_path, item_alias = Item.split_item_path request.path
     @section = Section.find_by_path(section_path) || not_found
     @item = Item.find_by_alias_and_section_id(item_alias, @section.id) || not_found
     not_found if @section.hidden or @item.hidden

@@ -9,7 +9,7 @@ class Admin::CommentsController < ApplicationController
 
 
   def index
-    @comments = Comment.order :created_at
+    @comments = Comment.order(:created_at).page params[:page]
   end
 
 
