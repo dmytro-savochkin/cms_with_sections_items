@@ -3,7 +3,7 @@
   - if element.kind_of? Section
     - unless element.hidden
       - if request.path != '/' + element.full_path
-        = link_to element.name, section_path(element.full_path), :class => ("muted" if not @section.nil? and @section.id == element.id)
+        = link_to name_by_language(element), section_path(element.full_path), :class => ("muted" if not @section.nil? and @section.id == element.id)
       - else
-        = element.name
+        = name_by_language(element)
 

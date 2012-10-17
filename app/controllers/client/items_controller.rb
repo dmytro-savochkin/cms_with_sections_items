@@ -19,6 +19,6 @@ class Client::ItemsController < ApplicationController
 
   def bread_crumbs
     current_menu_element = @menu_list.select {|e| @section.id == e.id}.first
-    @bread_crumbs = [current_menu_element.bread_crumbs, @item.name].flatten
+    @bread_crumbs = [current_menu_element.bread_crumbs, @item].flatten
   end
 end

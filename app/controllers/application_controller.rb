@@ -25,6 +25,15 @@ class ApplicationController < ActionController::Base
 
 
 
+  def url_options
+    additional_option = {}
+    if I18n.locale != I18n.default_locale
+      additional_option = { :locale => I18n.locale }
+    end
+    additional_option.merge(super)
+  end
+
+
 
   protected
 
@@ -36,13 +45,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale]
   end
 
-  def default_url_options(options = {})
-    logger.debug options.inspect
-    if I18n.locale != I18n.default_locale
-      return { :locale => I18n.locale }
-    end
-    {}
-  end
+
 
 
 

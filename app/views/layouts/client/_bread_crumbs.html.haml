@@ -1,9 +1,9 @@
 %ul.breadcrumb
-  - add_root_element_to_bread_crumbs t('.home')
+  - add_root_element_to_bread_crumbs
   - @bread_crumbs.each_with_index do |element, index|
     - if index == @bread_crumbs.length - 1
-      %li.active= element.titleize
+      %li.active= name_by_language(element).titleize
     - else
       %li
-        = link_to element.titleize, link_to_nth_element_of(index, request.path)
+        = link_to name_by_language(element).titleize, link_to_nth_element_of(index, request.path)
         %span.divider /

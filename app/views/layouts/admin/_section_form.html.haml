@@ -1,9 +1,14 @@
 #coding: utf-8
 
-%div= f.label :name, t('models.section.name').titleize + ' ' + mark_required(Section, :name)
+%div= f.label :name, name_with_language(t('models.section.name'), 'en') + mark_required(Section, :name)
 %div
   = f.text_field :name
   .text-error= @section.errors[:name].join(', ')
+
+%div= f.label :name_ru, name_with_language(t('models.section.name'), 'ru') + mark_required(Section, :name_ru)
+%div
+  = f.text_field :name_ru
+  .text-error= @section.errors[:name_ru].join(', ')
 
 %br
 

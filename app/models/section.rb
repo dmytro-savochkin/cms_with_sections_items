@@ -5,7 +5,7 @@ class Section < ActiveRecord::Base
   has_many :items, :foreign_key => 'section_id', :order => 'position', :dependent => :delete_all
 
 
-  attr_accessible :name, :level, :alias, :parent_id, :hidden, :description
+  attr_accessible :name, :level, :alias, :parent_id, :hidden, :description, :name_ru
   attr_accessor :can_be_shifted, :full_path, :bread_crumbs
 
 
@@ -28,7 +28,6 @@ class Section < ActiveRecord::Base
 
   # TODO: write unit tests for model and controller after MacOS
   # TODO: maybe CarrierWave after MacOS
-  #! TODO: localization? and default_url_options? maybe fields for rus names in models/db?
   # TODO: refactoring
   # heroku, github
 

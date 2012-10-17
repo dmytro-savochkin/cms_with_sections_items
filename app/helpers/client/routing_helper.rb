@@ -4,9 +4,12 @@ module Client::RoutingHelper
     section_path path.split("/").drop(1)[0...n].join("/")
   end
 
-  def add_root_element_to_bread_crumbs(root_element)
+  def add_root_element_to_bread_crumbs
     unless @bread_crumbs.nil?
-      @bread_crumbs.unshift root_element
+      @bread_crumbs.unshift({
+        :name => t('layouts.client.bread_crumbs.home'),
+        :name_ru => t('layouts.client.bread_crumbs.home')
+      })
     end
   end
 

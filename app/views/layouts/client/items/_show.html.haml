@@ -1,6 +1,7 @@
 %div
   = link_to item_path(item.parent_section_path, item.alias) do
-    = item.name.titleize
-    %br
-    = image_tag(item.photo.url(:thumb), :height => 200)
+    = name_by_language(item).titleize
+    - unless item.photo_file_name.nil?
+      %br
+      = image_tag(item.photo.url(:thumb), :height => 200)
 

@@ -1,34 +1,47 @@
-= f.label :name, t('models.item.name').capitalize + ' ' + mark_required(Item, :name)
-%br
-= f.text_field :name
-.text-error= @item.errors[:name].join(', ')
+%div
+  = f.label :name, name_with_language(t('models.item.name'), 'en') + mark_required(Item, :name)
+%div
+  = f.text_field :name
+  .text-error= @item.errors[:name].join(', ')
+
+%div
+  = f.label :name_ru, name_with_language(t('models.item.name'), 'ru') + mark_required(Item, :name_ru)
+%div
+  = f.text_field :name_ru
+  .text-error= @item.errors[:name_ru].join(', ')
+
 %br
 
-= f.label :alias, t('models.item.alias').capitalize + ' ' + mark_required(Item, :alias)
-%br
-= f.text_field :alias
-.text-error= @item.errors[:alias].join(', ')
-%br
-
-= f.label :section_id, t('models.item.parent').capitalize + ' ' + mark_required(Item, :section_id)
-%br
-= f.select :section_id, options_for_select(@tabulated_sections, @item[:section_id])
-.text-error= @item.errors[:section_id].join(', ')
-%br
+%div= f.label :alias, t('models.item.alias').capitalize + ' ' + mark_required(Item, :alias)
+%div
+  = f.text_field :alias
+  .text-error= @item.errors[:alias].join(', ')
 %br
 
+%div= f.label :section_id, t('models.item.parent').capitalize + ' ' + mark_required(Item, :section_id)
+%div
+  = f.select :section_id, options_for_select(@tabulated_sections, @item[:section_id])
+  .text-error= @item.errors[:section_id].join(', ')
+%br
+%br
 
-= f.label :price, t('models.item.price').capitalize + ' ' + mark_required(Item, :price)
-= f.text_field :price
-.text-error= @item.errors[:price].join(', ')
 
-= f.label :amount, t('models.item.amount').capitalize + ' ' + mark_required(Item, :amount)
-= f.text_field :amount
-.text-error= @item.errors[:amount].join(', ')
+%div= f.label :price, t('models.item.price').capitalize + ' ' + mark_required(Item, :price)
+%div
+  = f.text_field :price
+  .text-error= @item.errors[:price].join(', ')
+%br
 
-= f.label :manufacturer, t('models.item.manufacturer').capitalize + ' ' + mark_required(Item, :manufacturer)
-= f.text_field :manufacturer
-.text-error= @item.errors[:manufacturer].join(', ')
+%div= f.label :amount, t('models.item.amount').capitalize + ' ' + mark_required(Item, :amount)
+%div
+  = f.text_field :amount
+  .text-error= @item.errors[:amount].join(', ')
+%br
+
+%div= f.label :manufacturer, t('models.item.manufacturer').capitalize + ' ' + mark_required(Item, :manufacturer)
+%div
+  = f.text_field :manufacturer
+  .text-error= @item.errors[:manufacturer].join(', ')
 %br
 %br
 
@@ -43,27 +56,28 @@
 %br
 
 
-= f.label :description, t('models.item.description').capitalize + ' ' + mark_required(Item, :description)
-%br
-= f.text_area :description, :size => '80x8'
-.text-error= @item.errors[:description].join(', ')
-%br
-
-
+%div= f.label :description, t('models.item.description').capitalize + ' ' + mark_required(Item, :description)
+%div
+  = f.text_area :description, :size => '80x8'
+  .text-error= @item.errors[:description].join(', ')
 %br
 
 
-= f.check_box(:on_main_page, :checked => @item[:on_main_page])
-= f.label :on_main_page, t('models.item.show_on_main_page').capitalize + ' ' + mark_required(Item, :on_main_page)
-%br
 %br
 
 
-= f.check_box(:hidden, :checked => @item[:hidden])
-= f.label :hidden, t('models.item.hidden').capitalize + ' ' + mark_required(Item, :hidden)
+%div
+  = f.check_box(:on_main_page, :checked => @item[:on_main_page])
+  = f.label :on_main_page, t('models.item.show_on_main_page').capitalize + ' ' + mark_required(Item, :on_main_page)
 %br
 
 
-- unless @item.nil?
-  .text-error= errors_messages(@item.errors,
-    [:name, :price, :manufacturer, :amount, :alias, :section_id, :photo_file_size, :photo_content_type]).join.html_safe
+%div
+  = f.check_box(:hidden, :checked => @item[:hidden])
+  = f.label :hidden, t('models.item.hidden').capitalize + ' ' + mark_required(Item, :hidden)
+%br
+
+%div
+  - unless @item.nil?
+    .text-error= errors_messages(@item.errors,
+      [:name, :price, :manufacturer, :amount, :alias, :section_id, :photo_file_size, :photo_content_type]).join.html_safe

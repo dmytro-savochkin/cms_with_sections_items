@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016230518) do
+ActiveRecord::Schema.define(:version => 20121017141110) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",               :default => "", :null => false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20121016230518) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "name_ru"
   end
 
   create_table "sections", :force => true do |t|
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20121016230518) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.text     "description"
+    t.string   "name_ru"
   end
 
   add_index "sections", ["alias", "parent_id"], :name => "index_sections_on_alias_and_parent_id", :unique => true

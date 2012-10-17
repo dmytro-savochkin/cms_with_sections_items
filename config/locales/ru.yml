@@ -7,6 +7,16 @@ ru:
 
   back: 'назад'
 
+  language:
+    en:
+      short: 'англ'
+      default: 'английский'
+    ru:
+      short: 'рус'
+      default: 'русский'
+
+
+
   date:
     abbr_day_names:
     - Вс

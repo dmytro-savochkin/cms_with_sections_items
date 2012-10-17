@@ -7,6 +7,14 @@ en:
 
   back: 'back'
 
+  language:
+    en:
+      short: 'eng'
+      default: 'english'
+    ru:
+      short: 'rus'
+      default: 'russian'
+
 
 
 

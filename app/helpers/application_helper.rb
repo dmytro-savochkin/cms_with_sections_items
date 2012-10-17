@@ -40,7 +40,17 @@ module ApplicationHelper
 
 
 
+  def name_by_language(object)
+    if I18n.locale.to_s == "ru" and not object[:name_ru].to_s.empty?
+      return object[:name_ru]
+    end
+    object[:name]
+  end
 
+
+  def name_with_language(name, language)
+    name.capitalize  + ' (' + t('language.' + language + '.short') + ') '
+  end
 
 
   def link_color?(hidden)

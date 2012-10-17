@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
   has_many :comments, :foreign_key => 'item_id', :order => 'created_at', :dependent => :delete_all
 
 
-  paginates_per 12
+  paginates_per 9
 
 
   before_validation :set_position_if_not_set
@@ -11,7 +11,7 @@ class Item < ActiveRecord::Base
 
 
   attr_accessible :name, :alias, :section_id, :amount, :manufacturer,
-                  :photo, :description, :on_main_page,
+                  :photo, :description, :on_main_page, :name_ru,
                   :hidden, :position, :price, :id, :created_at, :updated_at
 
   attr_accessor :can_be_shifted, :full_path, :bread_crumbs, :parent_section_path
@@ -30,7 +30,6 @@ class Item < ActiveRecord::Base
   validates_format_of :alias, :with => /^[0-9a-z_-]+$/, :message => I18n.t('models.item.wrong_alias')
   validates_length_of :alias, :in => 1..40
   validates_length_of :name, :in => 1..120
-  validates_length_of :price, :in => 1..30
   validates_length_of :manufacturer, :maximum => 120
   validates_length_of :amount, :maximum => 120
   validates_length_of :description, :maximum => 1200
